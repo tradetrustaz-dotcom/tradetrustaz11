@@ -4,7 +4,7 @@
  * Sections: Nav, Hero, TrustBar, HowItWorks, TrustScore, Vignettes, WhyDifferent, Privacy, FinalCTA, Footer
  */
 import { useState, useEffect, useRef } from "react";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 import {
   Upload, CheckCircle, AlertTriangle, Shield, Lock, Trash2,
   TrendingDown, BarChart2, FileText, Star, ArrowRight, ChevronDown
@@ -717,9 +717,10 @@ export default function Home() {
               Data sourced from public records only and is for informational purposes only. TradeTrust AZ is not a licensed contractor referral service. Reports do not constitute legal advice. For Arizona homeowners only (for now).
             </p>
             <div className="flex gap-4 text-xs" style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'Inter', sans-serif" }}>
-              <button onClick={() => {}} className="hover:text-white transition-colors">Privacy</button>
-              <button onClick={() => {}} className="hover:text-white transition-colors">Terms</button>
-              <button onClick={() => {}} className="hover:text-white transition-colors">Contact</button>
+              <Link href="/legal/privacy" className="hover:text-white transition-colors">Privacy</Link>
+              <Link href="/legal/tos" className="hover:text-white transition-colors">Terms</Link>
+              <Link href="/contractor-apply" className="hover:text-white transition-colors">Contractors</Link>
+              <a href="mailto:legal@tradetrustaz.com" className="hover:text-white transition-colors">Contact</a>
             </div>
           </div>
           <p className="text-center text-xs mt-6" style={{ color: "rgba(255,255,255,0.2)", fontFamily: "'Inter', sans-serif" }}>

@@ -9,6 +9,9 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Report from "./pages/Report";
 import Pricing from "./pages/Pricing";
+import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ContractorApply from "./pages/ContractorApply";
 
 function Router() {
   return (
@@ -17,6 +20,9 @@ function Router() {
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/report/:id" component={Report} />
       <Route path="/pricing" component={Pricing} />
+      <Route path="/legal/tos" component={TermsOfService} />
+      <Route path="/legal/privacy" component={PrivacyPolicy} />
+      <Route path="/contractor-apply" component={ContractorApply} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

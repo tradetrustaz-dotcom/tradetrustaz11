@@ -7,6 +7,7 @@ import { useState, useEffect, useCallback } from "react";
 import { X, Upload, FileText, CheckCircle, AlertTriangle, TrendingDown, Clock, Star, Building } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TrustScoreGauge } from "./TrustScoreGauge";
+import { ConsumerTriageChecklist, type TriageResponses } from "./ConsumerTriageChecklist";
 import { useLocation } from "wouter";
 
 interface DemoModalProps {
@@ -136,6 +137,9 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
   const [processingMsg, setProcessingMsg] = useState(0);
   const [processingDone, setProcessingDone] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [triageComplete, setTriageComplete] = useState(false);
+  const [triageResponses, setTriageResponses] = useState<TriageResponses | null>(null);
+  const [tosAccepted, setTosAccepted] = useState(false);
   const [, navigate] = useLocation();
 
   // Reset on open
@@ -145,6 +149,9 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
       setSelectedJob("hvac");
       setProcessingMsg(0);
       setProcessingDone(false);
+      setTriageComplete(false);
+      setTriageResponses(null);
+      setTosAccepted(false);
     }
   }, [open]);
 
@@ -170,8 +177,14 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setDragOver(false);
-    setStep("jobtype");
+    // Don't advance until triage is complete
   }, []);
+
+  const handleTriageComplete = (responses: TriageResponses, tos: boolean) => {
+    setTriageResponses(responses);
+    setTosAccepted(tos);
+    setTriageComplete(true);
+  };
 
   const report = SAMPLE_REPORTS[selectedJob] || SAMPLE_REPORTS["hvac"];
 
@@ -214,41 +227,20 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
           </button>
         </div>
 
-        {/* Step: Upload */}
+        {/* Step: Upload — includes Triage Checklist + click-wrap gate */}
         {step === "upload" && (
-          <div className="p-6 space-y-4">
-            <div
-              className={`upload-zone flex flex-col items-center justify-center p-12 text-center cursor-pointer ${dragOver ? "drag-over" : ""}`}
-              onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
-              onDragLeave={() => setDragOver(false)}
-              onDrop={handleDrop}
-              onClick={() => setStep("jobtype")}
-            >
-              <Upload className="w-10 h-10 mb-3" style={{ color: "#14B8A6" }} />
-              <p className="font-semibold text-white mb-1" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                Drag & drop your PDF quote here
-              </p>
-              <p className="text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
-                or click to choose a file
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.1)" }} />
-              <span className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>or</span>
-              <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.1)" }} />
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
+          <div className="p-6 space-y-5">
+            {/* Sample quote selector */}
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "'Space Grotesk', sans-serif" }}>Choose a sample quote to analyze</p>
+              <div className="grid grid-cols-2 gap-3">
               <button
-                onClick={() => setStep("jobtype")}
+                onClick={() => { setSelectedJob("hvac"); }}
                 className="flex items-center gap-3 p-4 rounded-xl border text-left transition-all duration-200"
                 style={{
-                  border: "1px solid rgba(20,184,166,0.3)",
-                  background: "rgba(20,184,166,0.06)",
+                  border: selectedJob === "hvac" ? "1px solid #14B8A6" : "1px solid rgba(20,184,166,0.3)",
+                  background: selectedJob === "hvac" ? "rgba(20,184,166,0.12)" : "rgba(20,184,166,0.06)",
                 }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.borderColor = "#14B8A6")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.borderColor = "rgba(20,184,166,0.3)")}
               >
                 <FileText className="w-5 h-5 flex-shrink-0" style={{ color: "#14B8A6" }} />
                 <div>
@@ -259,14 +251,12 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
                 </div>
               </button>
               <button
-                onClick={() => { setSelectedJob("water-heater"); setStep("jobtype"); }}
+                onClick={() => { setSelectedJob("water-heater"); }}
                 className="flex items-center gap-3 p-4 rounded-xl border text-left transition-all duration-200"
                 style={{
-                  border: "1px solid rgba(249,115,22,0.3)",
-                  background: "rgba(249,115,22,0.06)",
+                  border: selectedJob === "water-heater" ? "1px solid #F97316" : "1px solid rgba(249,115,22,0.3)",
+                  background: selectedJob === "water-heater" ? "rgba(249,115,22,0.12)" : "rgba(249,115,22,0.06)",
                 }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.borderColor = "#F97316")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.borderColor = "rgba(249,115,22,0.3)")}
               >
                 <FileText className="w-5 h-5 flex-shrink-0" style={{ color: "#F97316" }} />
                 <div>
@@ -276,10 +266,46 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
                   <p className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>$4,200 · Tucson</p>
                 </div>
               </button>
+              </div>
             </div>
 
-            <p className="text-xs text-center" style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'Inter', sans-serif" }}>
-              🔒 Privacy protected: personal info is automatically removed before analysis
+            {/* Divider */}
+            <div className="flex items-center gap-3">
+              <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.08)" }} />
+              <span className="text-xs" style={{ color: "rgba(255,255,255,0.3)", fontFamily: "'Inter', sans-serif" }}>Then answer the 5-question triage below</span>
+              <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.08)" }} />
+            </div>
+
+            {/* Triage Checklist — dark theme wrapper */}
+            <div
+              className="rounded-xl p-4"
+              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
+            >
+              <ConsumerTriageChecklist
+                compact
+                showClickWrap
+                onComplete={handleTriageComplete}
+              />
+            </div>
+
+            {/* Proceed button — gated behind triage + ToS */}
+            <Button
+              onClick={() => { if (triageComplete) setStep("jobtype"); }}
+              disabled={!triageComplete}
+              className="w-full py-3 font-bold text-base rounded-xl transition-all duration-150"
+              style={{
+                background: triageComplete ? "#14B8A6" : "rgba(255,255,255,0.08)",
+                color: triageComplete ? "#0F172A" : "rgba(255,255,255,0.3)",
+                fontFamily: "'Space Grotesk', sans-serif",
+                cursor: triageComplete ? "pointer" : "not-allowed",
+                boxShadow: triageComplete ? "0 0 20px rgba(20,184,166,0.3)" : "none",
+              }}
+            >
+              {triageComplete ? "Analyze This Quote →" : "Complete all 5 questions and accept Terms to continue"}
+            </Button>
+
+            <p className="text-xs text-center" style={{ color: "rgba(255,255,255,0.25)", fontFamily: "'Inter', sans-serif" }}>
+              🔒 Personal info is automatically removed before analysis
             </p>
           </div>
         )}
