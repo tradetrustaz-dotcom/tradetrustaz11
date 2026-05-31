@@ -66,7 +66,7 @@ const SAMPLE_REPORTS: Record<string, {
     jobLabel: "Water Heater Replacement",
     findings: [
       { type: "red", text: "Quote is 100–180% above Tucson area market rate" },
-      { type: "red", text: "Urgency language ('dangerous, must replace today') is a pressure tactic" },
+      { type: "red", text: "Urgency language ('must replace today') reflects a non-standard market deviation; independent assessment recommended" },
       { type: "red", text: "Parts markup is 4× wholesale cost" },
       { type: "green", text: "Installation scope appears standard" },
     ],
@@ -431,7 +431,7 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
 
             {/* Disclaimer */}
             <p className="text-xs" style={{ color: "rgba(255,255,255,0.3)", fontFamily: "'Inter', sans-serif" }}>
-              This is a sample report using illustrative data for demonstration purposes. Actual analysis uses real Arizona market data. Data sourced from public records only and is for informational purposes only.
+              DEMO DATA – NOT A REAL CONTRACTOR RECORD. This is a sample report using illustrative data for demonstration purposes only. The variances shown represent statistical deviations from pricing norms and do not constitute evidence of fraud, intentional overcharging, or unlawful practices by any contractor. Actual analysis uses real Arizona market data sourced from public records. Reports do not constitute legal advice. Local market conditions and project complexities may justify pricing variations outside standard baseline models. For formal disputes, consult qualified legal counsel.
             </p>
 
             {/* CTA */}
