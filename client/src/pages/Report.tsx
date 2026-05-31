@@ -40,15 +40,15 @@ const REPORT_DATA: Record<string, {
     fairHigh: 8500,
     jobType: "HVAC",
     findings: [
-      { type: "red", text: "Total price reflects a 133–219% unsubstantiated billing variance above the Phoenix metro market rate for comparable HVAC replacement." },
-      { type: "red", text: "The existing unit is only 9 years old — average lifespan is 15–20 years. Replacement may not be necessary." },
-      { type: "red", text: "Labor charge of $4,200 is approximately 3× the regional average for this job type." },
-      { type: "red", text: "Equipment markup exceeds industry standard (15–20%) by approximately 85%." },
-      { type: "red", text: "Business history shows multiple operating names in the Phoenix area — verify current licensing status with the AZ ROC." },
+      { type: "red", text: "High Variance Index: Total Baseline Deviation of 133–219% above the Phoenix metro regional baseline for comparable HVAC replacement." },
+      { type: "red", text: "Unit age (9 years) is below the average replacement threshold of 15–20 years. A repair assessment is recommended before committing to replacement." },
+      { type: "red", text: "Regional Labor Rate Premium: Labor component reflects a 3× deviation above the Phoenix metro average for this job type." },
+      { type: "red", text: "Material Component Baseline Deviation: Equipment markup exceeds the industry-standard range (15–20%) by approximately 85%." },
+      { type: "red", text: "Multiple operating names detected in the Phoenix area — verify current licensing status with the Arizona Registrar of Contractors." },
       { type: "green", text: "Scope of work is described clearly and completely." },
-      { type: "green", text: "Warranty terms are standard for the industry (10 years parts, 1 year labor)." },
+      { type: "green", text: "Warranty terms are within the standard industry range (10 years parts, 1 year labor)." },
     ],
-    negotiation: "\"I've done some research and the fair market range for this HVAC replacement in the Phoenix area is $6,200–$8,500. I'd like to move forward with you, but I need you to bring the quote in line with that range. Can you revise it? I'm also not sure replacement is necessary given the unit is only 9 years old — can we discuss a repair assessment first?\"",
+    negotiation: "\"I've reviewed this quote against regional market data. The standard range for this HVAC replacement in the Phoenix area is $6,200–$8,500. I'd like to move forward with you, but I need a revised quote that aligns with that range. I'd also like to discuss a repair assessment first, given the unit is only 9 years old.\"",
     lineItems: [
       { label: "Equipment", yours: 12000, fairLow: 3500, fairHigh: 4800 },
       { label: "Labor", yours: 4200, fairLow: 1200, fairHigh: 1800 },
@@ -68,12 +68,12 @@ const REPORT_DATA: Record<string, {
     fairHigh: 2100,
     jobType: "Water Heater",
     findings: [
-      { type: "red", text: "Quote is 100–180% above the Tucson area market rate for water heater replacement." },
-      { type: "red", text: "Urgency language ('must replace today') reflects a non-standard market deviation; independent assessment is recommended before committing." },
-      { type: "red", text: "Parts markup represents a non-standard market deviation of approximately 4× wholesale cost." },
-      { type: "green", text: "Installation scope appears standard for the job type." },
+      { type: "red", text: "High Variance Index: Total Baseline Deviation of 100–180% above the Tucson regional baseline for water heater replacement." },
+      { type: "red", text: "Conditional Diagnostic Premium detected: urgency language ('must replace today') is a conditional service pressure indicator. An independent assessment is recommended before committing." },
+      { type: "red", text: "Material Component Baseline Deviation: Parts pricing reflects approximately 4× the documented wholesale cost baseline." },
+      { type: "green", text: "Installation scope aligns with standard regional operational parameters for this job type." },
     ],
-    negotiation: "\"The average cost for this water heater replacement in Tucson is $1,500–$2,100. I'm happy to hire you, but I need a revised quote that reflects market pricing. I'm also not in a rush — I'd like a second opinion before deciding on replacement vs. repair.\"",
+    negotiation: "\"I've reviewed this quote against regional market data. The standard range for water heater replacement in Tucson is $1,500–$2,100. I'd like to move forward with you, but I need a revised quote that aligns with that range. I'd also like an independent assessment before deciding between repair and replacement.\"",
     lineItems: [
       { label: "Unit/Equipment", yours: 2800, fairLow: 800, fairHigh: 1200 },
       { label: "Labor", yours: 900, fairLow: 450, fairHigh: 600 },
@@ -119,13 +119,13 @@ const REPORT_DATA: Record<string, {
     fairHigh: 13000,
     jobType: "Roofing",
     findings: [
-      { type: "red", text: "Quote is 12–61% above the Mesa market range for comparable roof replacement." },
-      { type: "red", text: "Tear-off labor charge is above the regional average." },
-      { type: "green", text: "Material grade specified is appropriate for Arizona climate." },
-      { type: "green", text: "Warranty terms are competitive (5 years workmanship)." },
-      { type: "green", text: "Company has a clean BBB record." },
+      { type: "red", text: "Moderate-to-High Variance: Total Baseline Deviation of 12–61% above the Mesa regional baseline for comparable roof replacement." },
+      { type: "red", text: "Regional Labor Rate Premium: Tear-off labor component exceeds the Mesa metro regional average for this job scope." },
+      { type: "green", text: "Material grade specified is appropriate for Arizona climate conditions." },
+      { type: "green", text: "Warranty terms are within the competitive range for this job type (5 years workmanship)." },
+      { type: "green", text: "Company record shows no significant complaint history." },
     ],
-    negotiation: "\"I've compared this quote to similar roofing jobs in Mesa. The fair range is $9,000–$13,000. I'd like to work with you — can you sharpen the pencil on the labor charge? I'm ready to sign once we're in that range.\"",
+    negotiation: "\"I've reviewed this quote against regional market data. The standard range for this roof replacement in Mesa is $9,000–$13,000. I'd like to work with you — can you revise the labor component to align with that range? I'm ready to move forward once the quote reflects market benchmarks.\"",
     lineItems: [
       { label: "Materials", yours: 7200, fairLow: 4500, fairHigh: 6500 },
       { label: "Labor & Tear-off", yours: 5800, fairLow: 3200, fairHigh: 4800 },
@@ -263,15 +263,15 @@ export default function Report() {
                 style={{ background: "rgba(249,115,22,0.15)", color: "#F97316", fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 <TrendingDown className="w-4 h-4" />
-                You have every right to push back on this. Potential savings: up to {fmt(overcharge)} ({overchargePercent}% over market).
+                Baseline deviation detected. Potential adjustment range: up to {fmt(overcharge)} ({overchargePercent}% above regional baseline).
               </div>
             ) : (
               <div
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold"
-                style={{ background: "rgba(20,184,166,0.15)", color: "#14B8A6", fontFamily: "'Space Grotesk', sans-serif" }}
+                style={{ background: "rgba(16,185,129,0.15)", color: "#10B981", fontFamily: "'Space Grotesk', sans-serif" }}
               >
                 <CheckCircle className="w-4 h-4" />
-                This looks fair — here's why.
+                Pricing aligns with standard regional operational margins.
               </div>
             )}
           </div>

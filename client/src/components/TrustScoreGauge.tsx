@@ -1,6 +1,12 @@
 /**
  * TrustScoreGauge — Animated circular arc gauge
- * Design: Precision Trust — navy background, teal/yellow/orange arc by score
+ * Design: Precision Trust — navy background, three-tier Baseline Deviation Percentage scale
+ *
+ * Variance Scale (maps score → deviation tier):
+ *   Green  (#10B981): score 85–100 → 0–15% above regional baseline (Within Standard Range)
+ *   Yellow (#F59E0B): score 50–84  → 16–40% above regional baseline (Moderate Deviation)
+ *   Red    (#EF4444): score 0–49   → >40% above regional baseline   (High Variance Index)
+ *
  * Animates from 0 to score value on mount
  */
 import { useEffect, useRef, useState } from "react";
@@ -14,19 +20,24 @@ interface TrustScoreGaugeProps {
   dark?: boolean;         // dark background variant
 }
 
+/**
+ * Maps a 0–100 trust score to the three-tier Baseline Deviation Percentage color.
+ * High score = low variance = green. Low score = high variance = red.
+ */
 function getScoreColor(score: number) {
-  if (score <= 40) return "#F97316";   // orange — low
-  if (score <= 70) return "#EAB308";   // yellow — mid
-  return "#14B8A6";                    // teal — high
+  if (score <= 49) return "#EF4444";   // red   — High Variance Index (>40% above baseline)
+  if (score <= 84) return "#F59E0B";   // amber — Moderate Deviation (16–40% above baseline)
+  return "#10B981";                    // green — Within Standard Range (0–15% above baseline)
 }
 
+/** Neutral, data-driven deviation tier labels — no accusatory language */
 function getScoreLabel(score: number) {
-  if (score <= 25) return "Overpriced";
-  if (score <= 40) return "Concerning";
-  if (score <= 60) return "Mixed";
-  if (score <= 75) return "Fair";
-  if (score <= 90) return "Good Value";
-  return "Excellent";
+  if (score <= 25) return "High Variance";
+  if (score <= 49) return "Elevated Deviation";
+  if (score <= 69) return "Moderate Deviation";
+  if (score <= 84) return "Low Deviation";
+  if (score <= 94) return "Within Baseline";
+  return "Baseline Aligned";
 }
 
 export function TrustScoreGauge({
