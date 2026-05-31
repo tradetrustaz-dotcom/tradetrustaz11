@@ -24,12 +24,15 @@ export function Navbar() {
     { label: "How it Works", href: "#how-it-works" },
     { label: "Trust Score", href: "#trust-score" },
     { label: "Examples", href: "#examples" },
+    { label: "Pricing", href: "/pricing", isRoute: true },
     { label: "For Contractors", href: "#contractors", subtle: true },
   ];
 
-  const scrollTo = (href: string) => {
+  const scrollTo = (href: string, isRoute?: boolean) => {
     setMenuOpen(false);
-    if (href.startsWith("#")) {
+    if (isRoute) {
+      navigate(href);
+    } else if (href.startsWith("#")) {
       const el = document.querySelector(href);
       if (el) el.scrollIntoView({ behavior: "smooth" });
     }
@@ -79,7 +82,7 @@ export function Navbar() {
           {navLinks.map((link) => (
             <button
               key={link.label}
-              onClick={() => scrollTo(link.href)}
+              onClick={() => scrollTo(link.href, link.isRoute)}
               className="text-sm transition-colors duration-150"
               style={{
                 color: link.subtle ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.75)",
@@ -143,7 +146,7 @@ export function Navbar() {
             {navLinks.map((link) => (
               <button
                 key={link.label}
-                onClick={() => scrollTo(link.href)}
+                onClick={() => scrollTo(link.href, link.isRoute)}
                 className="text-left text-sm py-1"
                 style={{
                   color: link.subtle ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.8)",
