@@ -698,6 +698,48 @@ export default function Home() {
       </section>
 
       {/* ── FOOTER ────────────────────────────────────────────────────────────── */}
+
+      <section className="py-20" style={{ background: "#0F172A" }}>
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Monetization Lanes</h2>
+            <p className="text-lg max-w-3xl mx-auto" style={{ color: "rgba(255,255,255,0.72)" }}>
+              TradeTrust AZ supports homeowner reports, contractor verification workflows, institutional review access, and public benefit programs through neutral informational triage.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="rounded-2xl p-6" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <h3 className="text-xl font-semibold text-white mb-3">B2C — Homeowner Reports</h3>
+              <p style={{ color: "rgba(255,255,255,0.72)" }}>
+                One-time Deep Variance Reports for homeowner estimate and invoice review. Includes informational triage, source comparison, variance analysis, and downloadable informational PDF.
+              </p>
+            </div>
+
+            <div className="rounded-2xl p-6" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <h3 className="text-xl font-semibold text-white mb-3">B2B — Contractor Verification</h3>
+              <p style={{ color: "rgba(255,255,255,0.72)" }}>
+                Monthly contractor subscription for self-audit tools, contractor profile review, record correction requests, and optional factual verification certificate.
+              </p>
+            </div>
+
+            <div className="rounded-2xl p-6" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <h3 className="text-xl font-semibold text-white mb-3">B2B Institutional / Enterprise Access</h3>
+              <p style={{ color: "rgba(255,255,255,0.72)" }}>
+                For insurance carriers, HOAs, property managers, lenders, warranty companies, and legal intake teams. Includes bulk review dashboard, monitoring, API access, team seats, volume pricing, contracts, and custom integrations.
+              </p>
+            </div>
+
+            <div className="rounded-2xl p-6" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <h3 className="text-xl font-semibold text-white mb-3">B2G / Public Benefit Programs</h3>
+              <p style={{ color: "rgba(255,255,255,0.72)" }}>
+                For city, county, state, nonprofit, and public-sector consumer protection programs. Includes grant-funded access, civic dashboards, procurement integrity screening, and public benefit reporting.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <footer className="py-12" style={{ background: "#0F172A", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
