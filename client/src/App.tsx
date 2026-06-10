@@ -12,6 +12,7 @@ import Pricing from "./pages/Pricing";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ContractorApply from "./pages/ContractorApply";
+import { Analytics } from "@vercel/analytics/react";
 
 function Router() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <TooltipProvider>
             <Toaster />
             <Router />
+            <Analytics />
           </TooltipProvider>
         </ThemeProvider>
       </PasswordGate>

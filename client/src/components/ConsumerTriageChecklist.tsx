@@ -9,7 +9,13 @@
  *  - compact: smaller layout for embedding in modals
  */
 import { useState } from "react";
-import { AlertTriangle, CheckCircle2, ShieldAlert, ShieldCheck, ExternalLink } from "lucide-react";
+import {
+  AlertTriangle,
+  CheckCircle2,
+  ShieldAlert,
+  ShieldCheck,
+  ExternalLink,
+} from "lucide-react";
 import { Link } from "wouter";
 
 export interface TriageResponses {
@@ -54,7 +60,8 @@ const QUESTIONS = [
     label: "Unverified Catastrophe Claim",
     description:
       "Did the technician claim a catastrophic failure exists without providing clear video or photographic proof?",
-    riskLabel: "Undocumented failure claim — unsubstantiated billing variance risk",
+    riskLabel:
+      "Undocumented failure claim — unsubstantiated billing variance risk",
   },
 ];
 
@@ -85,27 +92,52 @@ export function ConsumerTriageChecklist({
   const [responses, setResponses] = useState<TriageResponses>(EMPTY_RESPONSES);
   const [tosAccepted, setTosAccepted] = useState(false);
 
-  const answeredCount = Object.values(responses).filter((v) => v !== null).length;
-  const yesCount = Object.values(responses).filter((v) => v === true).length;
+  const answeredCount = Object.values(responses).filter(v => v !== null).length;
+  const yesCount = Object.values(responses).filter(v => v === true).length;
   const allAnswered = answeredCount === 5;
 
   const canProceed = allAnswered && (!showClickWrap || tosAccepted);
 
   const riskLevel =
     yesCount === 0
-      ? { label: "No Flags Detected", color: "#22C55E", bg: "rgba(34,197,94,0.1)", icon: <ShieldCheck className="w-5 h-5" /> }
+      ? {
+          label: "No Flags Detected",
+          color: "#22C55E",
+          bg: "rgba(34,197,94,0.1)",
+          icon: <ShieldCheck className="w-5 h-5" />,
+        }
       : yesCount === 1
-      ? { label: "Low Risk — 1 Flag", color: "#84CC16", bg: "rgba(132,204,22,0.1)", icon: <ShieldCheck className="w-5 h-5" /> }
-      : yesCount === 2
-      ? { label: "Moderate Risk — 2 Flags", color: "#F59E0B", bg: "rgba(245,158,11,0.1)", icon: <AlertTriangle className="w-5 h-5" /> }
-      : yesCount === 3
-      ? { label: "High Risk — 3 Flags", color: "#F97316", bg: "rgba(249,115,22,0.1)", icon: <AlertTriangle className="w-5 h-5" /> }
-      : { label: `Critical Risk — ${yesCount}/5 Tactics Detected`, color: "#EF4444", bg: "rgba(239,68,68,0.1)", icon: <ShieldAlert className="w-5 h-5" /> };
+        ? {
+            label: "Low Risk — 1 Flag",
+            color: "#84CC16",
+            bg: "rgba(132,204,22,0.1)",
+            icon: <ShieldCheck className="w-5 h-5" />,
+          }
+        : yesCount === 2
+          ? {
+              label: "Moderate Risk — 2 Flags",
+              color: "#F59E0B",
+              bg: "rgba(245,158,11,0.1)",
+              icon: <AlertTriangle className="w-5 h-5" />,
+            }
+          : yesCount === 3
+            ? {
+                label: "High Risk — 3 Flags",
+                color: "#F97316",
+                bg: "rgba(249,115,22,0.1)",
+                icon: <AlertTriangle className="w-5 h-5" />,
+              }
+            : {
+                label: `Critical Risk — ${yesCount}/5 Tactics Detected`,
+                color: "#EF4444",
+                bg: "rgba(239,68,68,0.1)",
+                icon: <ShieldAlert className="w-5 h-5" />,
+              };
 
   const setAnswer = (key: keyof TriageResponses, value: boolean) => {
     const next = { ...responses, [key]: value };
     setResponses(next);
-    const nextAnswered = Object.values(next).filter((v) => v !== null).length;
+    const nextAnswered = Object.values(next).filter(v => v !== null).length;
     if (nextAnswered === 5 && onComplete && (!showClickWrap || tosAccepted)) {
       onComplete(next, tosAccepted);
     }
@@ -125,7 +157,10 @@ export function ConsumerTriageChecklist({
         <div className="mb-2">
           <p
             className="text-xs font-bold uppercase tracking-widest mb-1"
-            style={{ color: "#14B8A6", fontFamily: "'Space Grotesk', sans-serif" }}
+            style={{
+              color: "#14B8A6",
+              fontFamily: "'Space Grotesk', sans-serif",
+            }}
           >
             5-Question Triage Checklist
           </p>
@@ -133,8 +168,8 @@ export function ConsumerTriageChecklist({
             className="text-sm"
             style={{ color: "#64748B", fontFamily: "'Inter', sans-serif" }}
           >
-            Answer each question based on your on-site experience. Your responses are factored
-            directly into your Trust Score.
+            Answer each question based on your on-site experience. Your
+            responses are factored directly into your Trust Score.
           </p>
         </div>
       )}
@@ -143,26 +178,41 @@ export function ConsumerTriageChecklist({
       {answeredCount > 0 && (
         <div
           className="flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-300"
-          style={{ background: riskLevel.bg, border: `1px solid ${riskLevel.color}30` }}
+          style={{
+            background: riskLevel.bg,
+            border: `1px solid ${riskLevel.color}30`,
+          }}
         >
           <span style={{ color: riskLevel.color }}>{riskLevel.icon}</span>
           <div>
             <p
               className="text-sm font-bold"
-              style={{ color: riskLevel.color, fontFamily: "'Space Grotesk', sans-serif" }}
+              style={{
+                color: riskLevel.color,
+                fontFamily: "'Space Grotesk', sans-serif",
+              }}
             >
               {riskLevel.label}
             </p>
-            <p className="text-xs" style={{ color: "#64748B", fontFamily: "'Inter', sans-serif" }}>
+            <p
+              className="text-xs"
+              style={{ color: "#64748B", fontFamily: "'Inter', sans-serif" }}
+            >
               {answeredCount}/5 questions answered
             </p>
           </div>
           {/* Progress bar */}
           <div className="flex-1 ml-2">
-            <div className="h-1.5 rounded-full" style={{ background: "rgba(15,23,42,0.08)" }}>
+            <div
+              className="h-1.5 rounded-full"
+              style={{ background: "rgba(15,23,42,0.08)" }}
+            >
               <div
                 className="h-1.5 rounded-full transition-all duration-500"
-                style={{ width: `${(yesCount / 5) * 100}%`, background: riskLevel.color }}
+                style={{
+                  width: `${(yesCount / 5) * 100}%`,
+                  background: riskLevel.color,
+                }}
               />
             </div>
           </div>
@@ -177,15 +227,30 @@ export function ConsumerTriageChecklist({
             key={q.key}
             className="rounded-xl p-4 transition-all duration-200"
             style={{
-              background: answer === true ? "rgba(239,68,68,0.04)" : answer === false ? "rgba(34,197,94,0.04)" : "rgba(15,23,42,0.03)",
-              border: answer === true ? "1px solid rgba(239,68,68,0.2)" : answer === false ? "1px solid rgba(34,197,94,0.2)" : "1px solid rgba(15,23,42,0.08)",
+              background:
+                answer === true
+                  ? "rgba(239,68,68,0.04)"
+                  : answer === false
+                    ? "rgba(34,197,94,0.04)"
+                    : "rgba(15,23,42,0.03)",
+              border:
+                answer === true
+                  ? "1px solid rgba(239,68,68,0.2)"
+                  : answer === false
+                    ? "1px solid rgba(34,197,94,0.2)"
+                    : "1px solid rgba(15,23,42,0.08)",
             }}
           >
             <div className="flex items-start gap-3">
               <span
                 className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold mt-0.5"
                 style={{
-                  background: answer !== null ? (answer ? "#EF4444" : "#22C55E") : "#E2E8F0",
+                  background:
+                    answer !== null
+                      ? answer
+                        ? "#EF4444"
+                        : "#22C55E"
+                      : "#E2E8F0",
                   color: answer !== null ? "white" : "#94A3B8",
                   fontFamily: "'Space Grotesk', sans-serif",
                 }}
@@ -195,20 +260,29 @@ export function ConsumerTriageChecklist({
               <div className="flex-1 min-w-0">
                 <p
                   className={`font-semibold mb-1 ${compact ? "text-xs" : "text-sm"}`}
-                  style={{ color: "#0F172A", fontFamily: "'Space Grotesk', sans-serif" }}
+                  style={{
+                    color: "#0F172A",
+                    fontFamily: "'Space Grotesk', sans-serif",
+                  }}
                 >
                   {q.label}
                 </p>
                 <p
                   className={`leading-relaxed mb-3 ${compact ? "text-xs" : "text-sm"}`}
-                  style={{ color: "#475569", fontFamily: "'Inter', sans-serif" }}
+                  style={{
+                    color: "#475569",
+                    fontFamily: "'Inter', sans-serif",
+                  }}
                 >
                   {q.description}
                 </p>
                 {answer === true && (
                   <p
                     className="text-xs mb-2 flex items-center gap-1"
-                    style={{ color: "#EF4444", fontFamily: "'Inter', sans-serif" }}
+                    style={{
+                      color: "#EF4444",
+                      fontFamily: "'Inter', sans-serif",
+                    }}
                   >
                     <AlertTriangle className="w-3 h-3" />
                     {q.riskLabel}
@@ -217,7 +291,10 @@ export function ConsumerTriageChecklist({
                 {answer === false && (
                   <p
                     className="text-xs mb-2 flex items-center gap-1"
-                    style={{ color: "#22C55E", fontFamily: "'Inter', sans-serif" }}
+                    style={{
+                      color: "#22C55E",
+                      fontFamily: "'Inter', sans-serif",
+                    }}
                   >
                     <CheckCircle2 className="w-3 h-3" />
                     No flag on this indicator
@@ -229,7 +306,8 @@ export function ConsumerTriageChecklist({
                     onClick={() => setAnswer(q.key, true)}
                     className="flex-1 py-2 rounded-lg text-sm font-semibold transition-all duration-150 active:scale-[0.97]"
                     style={{
-                      background: answer === true ? "#EF4444" : "rgba(239,68,68,0.08)",
+                      background:
+                        answer === true ? "#EF4444" : "rgba(239,68,68,0.08)",
                       color: answer === true ? "white" : "#EF4444",
                       fontFamily: "'Space Grotesk', sans-serif",
                       border: `1px solid ${answer === true ? "#EF4444" : "rgba(239,68,68,0.2)"}`,
@@ -241,7 +319,8 @@ export function ConsumerTriageChecklist({
                     onClick={() => setAnswer(q.key, false)}
                     className="flex-1 py-2 rounded-lg text-sm font-semibold transition-all duration-150 active:scale-[0.97]"
                     style={{
-                      background: answer === false ? "#22C55E" : "rgba(34,197,94,0.08)",
+                      background:
+                        answer === false ? "#22C55E" : "rgba(34,197,94,0.08)",
                       color: answer === false ? "white" : "#22C55E",
                       fontFamily: "'Space Grotesk', sans-serif",
                       border: `1px solid ${answer === false ? "#22C55E" : "rgba(34,197,94,0.2)"}`,
@@ -261,7 +340,9 @@ export function ConsumerTriageChecklist({
         <div
           className="rounded-xl p-4"
           style={{
-            background: tosAccepted ? "rgba(20,184,166,0.06)" : "rgba(15,23,42,0.03)",
+            background: tosAccepted
+              ? "rgba(20,184,166,0.06)"
+              : "rgba(15,23,42,0.03)",
             border: `1px solid ${tosAccepted ? "rgba(20,184,166,0.3)" : "rgba(15,23,42,0.1)"}`,
           }}
         >
@@ -269,7 +350,7 @@ export function ConsumerTriageChecklist({
             <input
               type="checkbox"
               checked={tosAccepted}
-              onChange={(e) => handleTosChange(e.target.checked)}
+              onChange={e => handleTosChange(e.target.checked)}
               className="mt-0.5 w-4 h-4 rounded flex-shrink-0"
               style={{ accentColor: "#14B8A6" }}
             />
@@ -277,14 +358,14 @@ export function ConsumerTriageChecklist({
               className="text-xs leading-relaxed"
               style={{ color: "#334155", fontFamily: "'Inter', sans-serif" }}
             >
-              I certify that the answers provided above are accurate to my on-site experience and
-              agree to the{" "}
+              I certify that the answers provided above are accurate to my
+              on-site experience and agree to the{" "}
               <Link
                 href="/legal/tos"
                 target="_blank"
                 className="underline font-medium inline-flex items-center gap-0.5"
                 style={{ color: "#14B8A6" }}
-                onClick={(e) => e.stopPropagation()}
+                onClick={e => e.stopPropagation()}
               >
                 Terms of Service <ExternalLink className="w-3 h-3" />
               </Link>{" "}
@@ -294,12 +375,12 @@ export function ConsumerTriageChecklist({
                 target="_blank"
                 className="underline font-medium inline-flex items-center gap-0.5"
                 style={{ color: "#14B8A6" }}
-                onClick={(e) => e.stopPropagation()}
+                onClick={e => e.stopPropagation()}
               >
                 Privacy Policy <ExternalLink className="w-3 h-3" />
               </Link>
-              . I understand that this report is for informational purposes only and does not
-              constitute legal advice.
+              . I understand that this report is for informational purposes only
+              and does not constitute legal advice.
             </span>
           </label>
         </div>
