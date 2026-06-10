@@ -171,7 +171,7 @@ export default function Home() {
               </div>
 
               {/* Trust bar */}
-              <div className="flex flex-wrap gap-4 text-sm" style={{ color: "rgba(255,255,255,0.55)", fontFamily: "'Inter', sans-serif" }}>
+              <div className="flex flex-wrap gap-4 text-sm" style={{ color: "rgba(255,255,255,0.7)", fontFamily: "'Inter', sans-serif" }}>
                 <span className="flex items-center gap-1.5">
                   <span style={{ color: "#14B8A6" }}>✓</span>
                   12,847 quotes analyzed this month
@@ -212,7 +212,7 @@ export default function Home() {
                   <TrustScoreGauge score={34} size={56} strokeWidth={5} dark animated showLabel={false} />
                   <div>
                     <p className="text-white text-sm font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>HVAC Quote · Phoenix</p>
-                    <p className="text-xs" style={{ color: "rgba(255,255,255,0.5)" }}>$19,800 quoted · ~$6,500 fair</p>
+                    <p className="text-xs" style={{ color: "rgba(255,255,255,0.65)" }}>$19,800 quoted · ~$6,500 fair</p>
                     <p className="text-xs font-semibold mt-0.5" style={{ color: "#F97316" }}>Score: 34/100 — Overpriced</p>
                   </div>
                 </div>
@@ -230,7 +230,7 @@ export default function Home() {
                 ].map((s) => (
                   <div key={s.label} className="flex-1 text-center">
                     <p className="font-bold font-mono text-lg" style={{ color: s.color, fontFamily: "'JetBrains Mono', monospace" }}>{s.val}</p>
-                    <p className="text-xs" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "'Inter', sans-serif" }}>{s.label}</p>
+                    <p className="text-xs" style={{ color: "rgba(255,255,255,0.6)", fontFamily: "'Inter', sans-serif" }}>{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -240,7 +240,7 @@ export default function Home() {
 
         {/* Scroll hint */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <ChevronDown className="w-6 h-6" style={{ color: "rgba(255,255,255,0.3)" }} />
+          <ChevronDown className="w-6 h-6" style={{ color: "rgba(255,255,255,0.45)" }} />
         </div>
       </section>
 
@@ -345,18 +345,18 @@ export default function Home() {
                 <div className="flex gap-8 flex-wrap justify-center">
                   <div className="text-center">
                     <TrustScoreGauge score={34} size={160} dark animated />
-                    <p className="text-sm mt-2" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "'Inter', sans-serif" }}>
+                    <p className="text-sm mt-2" style={{ color: "rgba(255,255,255,0.65)", fontFamily: "'Inter', sans-serif" }}>
                       Overpriced HVAC
                     </p>
                   </div>
                   <div className="text-center">
                     <TrustScoreGauge score={87} size={160} dark animated />
-                    <p className="text-sm mt-2" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "'Inter', sans-serif" }}>
+                    <p className="text-sm mt-2" style={{ color: "rgba(255,255,255,0.65)", fontFamily: "'Inter', sans-serif" }}>
                       Fair Plumbing Quote
                     </p>
                   </div>
                 </div>
-                <p className="text-center text-sm" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "'Inter', sans-serif" }}>
+                <p className="text-center text-sm" style={{ color: "rgba(255,255,255,0.6)", fontFamily: "'Inter', sans-serif" }}>
                   Color-coded: 0–40 orange · 41–70 yellow · 71–100 teal
                 </p>
               </div>
@@ -407,7 +407,7 @@ export default function Home() {
                           }}
                         />
                       </div>
-                      <p className="text-xs" style={{ color: "rgba(255,255,255,0.45)", fontFamily: "'Inter', sans-serif" }}>
+                      <p className="text-xs" style={{ color: "rgba(255,255,255,0.6)", fontFamily: "'Inter', sans-serif" }}>
                         {factor.desc}
                       </p>
                     </div>
@@ -472,7 +472,7 @@ export default function Home() {
                     style={{ background: "#0F172A" }}
                   >
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "'Space Grotesk', sans-serif" }}>
+                      <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.6)", fontFamily: "'Space Grotesk', sans-serif" }}>
                         {v.city} · {v.job}
                       </p>
                     </div>
@@ -533,8 +533,8 @@ export default function Home() {
               <table className="w-full text-left" style={{ fontFamily: "'Inter', sans-serif" }}>
                 <thead>
                   <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-                    <th className="pb-4 text-sm font-semibold" style={{ color: "rgba(255,255,255,0.4)", width: "40%" }}>Feature</th>
-                    <th className="pb-4 text-sm font-semibold text-center" style={{ color: "rgba(255,255,255,0.4)" }}>Other Review Sites</th>
+                    <th className="pb-4 text-sm font-semibold" style={{ color: "rgba(255,255,255,0.6)", width: "40%" }}>Feature</th>
+                    <th className="pb-4 text-sm font-semibold text-center" style={{ color: "rgba(255,255,255,0.6)" }}>Other Review Sites</th>
                     <th className="pb-4 text-sm font-semibold text-center" style={{ color: "#14B8A6" }}>TradeTrust AZ</th>
                   </tr>
                 </thead>
@@ -555,8 +555,8 @@ export default function Home() {
                       <td className="py-4 text-sm" style={{ color: "rgba(255,255,255,0.75)" }}>{feature as string}</td>
                       <td className="py-4 text-center">
                         {others
-                          ? <CheckCircle className="w-5 h-5 mx-auto" style={{ color: "rgba(255,255,255,0.3)" }} />
-                          : <span className="text-lg" style={{ color: "rgba(255,255,255,0.15)" }}>—</span>
+                          ? <CheckCircle className="w-5 h-5 mx-auto" style={{ color: "rgba(255,255,255,0.5)" }} />
+                          : <span className="text-lg" style={{ color: "rgba(255,255,255,0.4)" }}>—</span>
                         }
                       </td>
                       <td className="py-4 text-center">
@@ -658,7 +658,7 @@ export default function Home() {
             <h2 className="text-4xl font-bold text-white mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
               Ready to stop overpaying?
             </h2>
-            <p className="text-lg mb-8" style={{ color: "rgba(255,255,255,0.65)", fontFamily: "'Inter', sans-serif" }}>
+            <p className="text-lg mb-8" style={{ color: "rgba(255,255,255,0.75)", fontFamily: "'Inter', sans-serif" }}>
               Upload your first quote free. No credit card. No account required for the first try.
             </p>
             <Button
@@ -674,7 +674,7 @@ export default function Home() {
               <Upload className="w-5 h-5 mr-2" />
               Upload Quote & See Your Score — Free
             </Button>
-            <p className="mt-4 text-sm" style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'Inter', sans-serif" }}>
+            <p className="mt-4 text-sm" style={{ color: "rgba(255,255,255,0.55)", fontFamily: "'Inter', sans-serif" }}>
               First analysis is free. No credit card required.
             </p>
           </div>
@@ -686,7 +686,7 @@ export default function Home() {
         <div className="container">
           <div
             className="max-w-3xl mx-auto p-6 rounded-2xl text-sm leading-relaxed space-y-4"
-            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "'Inter', sans-serif", color: "rgba(255,255,255,0.5)" }}
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "'Inter', sans-serif", color: "rgba(255,255,255,0.65)" }}
           >
             <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#14B8A6", fontFamily: "'Space Grotesk', sans-serif" }}>Legal Disclaimer</p>
             <p>This platform provides automated price-validation analysis based on regional market averages, historical data baselines, and standard trade pricing structures. The reports, scores, and data visualizations generated by this tool are intended solely for informational, educational, and consumer advocacy purposes. They do not constitute formal legal advice, contract audits, or definitive regulatory findings.</p>
@@ -755,17 +755,17 @@ export default function Home() {
                 </span>
               </span>
             </div>
-            <p className="text-xs text-center" style={{ color: "rgba(255,255,255,0.3)", fontFamily: "'Inter', sans-serif", maxWidth: 480 }}>
+            <p className="text-xs text-center" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "'Inter', sans-serif", maxWidth: 480 }}>
               Data sourced from public records only and is for informational purposes only. TradeTrust AZ is not a licensed contractor referral service. Reports do not constitute legal advice. For Arizona homeowners only (for now).
             </p>
-            <div className="flex gap-4 text-xs" style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'Inter', sans-serif" }}>
+            <div className="flex gap-4 text-xs" style={{ color: "rgba(255,255,255,0.55)", fontFamily: "'Inter', sans-serif" }}>
               <Link href="/legal/privacy" className="hover:text-white transition-colors">Privacy</Link>
               <Link href="/legal/tos" className="hover:text-white transition-colors">Terms</Link>
               <Link href="/contractor-apply" className="hover:text-white transition-colors">Contractors</Link>
               <a href="mailto:legal@tradetrustaz.com" className="hover:text-white transition-colors">Contact</a>
             </div>
           </div>
-          <p className="text-center text-xs mt-6" style={{ color: "rgba(255,255,255,0.2)", fontFamily: "'Inter', sans-serif" }}>
+          <p className="text-center text-xs mt-6" style={{ color: "rgba(255,255,255,0.45)", fontFamily: "'Inter', sans-serif" }}>
             © 2025 TradeTrust AZ. All rights reserved.
           </p>
         </div>

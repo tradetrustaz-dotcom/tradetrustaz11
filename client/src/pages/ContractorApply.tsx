@@ -110,7 +110,7 @@ export default function ContractorApply() {
           </p>
           <p
             className="text-sm max-w-md mb-8"
-            style={{ color: "rgba(255,255,255,0.4)", fontFamily: "'Inter', sans-serif" }}
+            style={{ color: "rgba(255,255,255,0.6)", fontFamily: "'Inter', sans-serif" }}
           >
             Our team will verify your Arizona contractor license and contact you at{" "}
             <strong className="text-white">{form.email}</strong> within 2–3 business days with

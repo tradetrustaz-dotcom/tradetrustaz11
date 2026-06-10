@@ -209,7 +209,7 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
               {step === "processing" && "Analyzing your quote..."}
               {step === "report" && "Your Trust Score Report"}
             </h2>
-            <p className="text-sm mt-0.5" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "'Inter', sans-serif" }}>
+            <p className="text-sm mt-0.5" style={{ color: "rgba(255,255,255,0.65)", fontFamily: "'Inter', sans-serif" }}>
               {step === "upload" && "Upload a real quote or use our sample"}
               {step === "jobtype" && "One click — we'll do the rest"}
               {step === "processing" && "This usually takes 15–30 seconds"}
@@ -232,7 +232,7 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
           <div className="p-6 space-y-5">
             {/* Sample quote selector */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "'Space Grotesk', sans-serif" }}>Choose a sample quote to analyze</p>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "rgba(255,255,255,0.6)", fontFamily: "'Space Grotesk', sans-serif" }}>Choose a sample quote to analyze</p>
               <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={() => { setSelectedJob("hvac"); }}
@@ -247,7 +247,7 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
                   <p className="text-white text-sm font-semibold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                     Sample HVAC Quote
                   </p>
-                  <p className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>$19,800 · Phoenix</p>
+                  <p className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>$19,800 · Phoenix</p>
                 </div>
               </button>
               <button
@@ -263,7 +263,7 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
                   <p className="text-white text-sm font-semibold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                     Sample Water Heater
                   </p>
-                  <p className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>$4,200 · Tucson</p>
+                  <p className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>$4,200 · Tucson</p>
                 </div>
               </button>
               </div>
@@ -272,7 +272,7 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
             {/* Divider */}
             <div className="flex items-center gap-3">
               <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.08)" }} />
-              <span className="text-xs" style={{ color: "rgba(255,255,255,0.3)", fontFamily: "'Inter', sans-serif" }}>Then answer the 5-question triage below</span>
+              <span className="text-xs" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "'Inter', sans-serif" }}>Then answer the 5-question triage below</span>
               <div className="flex-1 h-px" style={{ background: "rgba(255,255,255,0.08)" }} />
             </div>
 
@@ -304,7 +304,7 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
               {triageComplete ? "Analyze This Quote →" : "Complete all 5 questions and accept Terms to continue"}
             </Button>
 
-            <p className="text-xs text-center" style={{ color: "rgba(255,255,255,0.25)", fontFamily: "'Inter', sans-serif" }}>
+            <p className="text-xs text-center" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "'Inter', sans-serif" }}>
               🔒 Personal info is automatically removed before analysis
             </p>
           </div>

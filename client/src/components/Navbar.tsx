@@ -85,14 +85,14 @@ export function Navbar() {
               onClick={() => scrollTo(link.href, link.isRoute)}
               className="text-sm transition-colors duration-150"
               style={{
-                color: link.subtle ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.75)",
+                color: link.subtle ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.75)",
                 fontFamily: "'Inter', sans-serif",
               }}
               onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.color = link.subtle ? "rgba(255,255,255,0.6)" : "white")
+                ((e.target as HTMLElement).style.color = link.subtle ? "rgba(255,255,255,0.75)" : "white")
               }
               onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.color = link.subtle ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.75)")
+                ((e.target as HTMLElement).style.color = link.subtle ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.75)")
               }
             >
               {link.label}
@@ -149,7 +149,7 @@ export function Navbar() {
                 onClick={() => scrollTo(link.href, link.isRoute)}
                 className="text-left text-sm py-1"
                 style={{
-                  color: link.subtle ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.8)",
+                  color: link.subtle ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.8)",
                   fontFamily: "'Inter', sans-serif",
                 }}
               >

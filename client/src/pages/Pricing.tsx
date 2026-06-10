@@ -207,7 +207,7 @@ export default function Pricing() {
           </h1>
           <p
             className="text-lg max-w-2xl mx-auto"
-            style={{ color: "rgba(255,255,255,0.55)", fontFamily: "'Inter', sans-serif" }}
+            style={{ color: "rgba(255,255,255,0.7)", fontFamily: "'Inter', sans-serif" }}
           >
             From a single homeowner checking one quote to enterprise property managers auditing
             hundreds of jobs — TradeTrust AZ scales with your needs.
@@ -224,7 +224,7 @@ export default function Pricing() {
               <div
                 key={i}
                 className="flex items-center gap-2 text-sm"
-                style={{ color: "rgba(255,255,255,0.4)", fontFamily: "'Inter', sans-serif" }}
+                style={{ color: "rgba(255,255,255,0.6)", fontFamily: "'Inter', sans-serif" }}
               >
                 <span style={{ color: "#14B8A6" }}>{b.icon}</span>
                 {b.text}
@@ -394,7 +394,7 @@ export default function Pricing() {
             </p>
             <p
               className="text-sm mb-4"
-              style={{ color: "rgba(255,255,255,0.5)", fontFamily: "'Inter', sans-serif" }}
+              style={{ color: "rgba(255,255,255,0.65)", fontFamily: "'Inter', sans-serif" }}
             >
               Start with a Single Consumer Audit — no account required. Upgrade anytime as your needs grow.
             </p>
