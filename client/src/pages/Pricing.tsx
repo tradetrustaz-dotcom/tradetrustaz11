@@ -169,13 +169,25 @@ export default function Pricing() {
     try {
       const stripe = await loadStripe(STRIPE_KEY);
       if (!stripe) throw new Error("Stripe failed to load");
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const result = await (stripe as any).redirectToCheckout({
-        lineItems: [{ price: priceId, quantity: 1 }],
-        mode: plan.mode,
-        successUrl: `${window.location.origin}/dashboard?checkout=success&plan=${plan.id}`,
-        cancelUrl: `${window.location.origin}/pricing?checkout=cancelled`,
+
+      // Create session on server to support webhook fulfillment with metadata
+      const response = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          priceId,
+          planId: plan.id,
+          mode: plan.mode,
+        }),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to create checkout session");
+      }
+
+      const { id: sessionId } = await response.json();
+      const result = await stripe.redirectToCheckout({ sessionId });
       if (result?.error) throw result.error;
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : "Checkout failed. Please try again.");
