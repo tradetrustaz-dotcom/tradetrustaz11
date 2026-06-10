@@ -12,12 +12,12 @@
 import { useEffect, useRef, useState } from "react";
 
 interface TrustScoreGaugeProps {
-  score: number;          // 0–100
-  size?: number;          // px diameter, default 200
-  strokeWidth?: number;   // default 14
-  animated?: boolean;     // default true
-  showLabel?: boolean;    // default true
-  dark?: boolean;         // dark background variant
+  score: number; // 0–100
+  size?: number; // px diameter, default 200
+  strokeWidth?: number; // default 14
+  animated?: boolean; // default true
+  showLabel?: boolean; // default true
+  dark?: boolean; // dark background variant
 }
 
 /**
@@ -25,9 +25,9 @@ interface TrustScoreGaugeProps {
  * High score = low variance = green. Low score = high variance = red.
  */
 function getScoreColor(score: number) {
-  if (score <= 49) return "#EF4444";   // red   — High Variance Index (>40% above baseline)
-  if (score <= 84) return "#F59E0B";   // amber — Moderate Deviation (16–40% above baseline)
-  return "#10B981";                    // green — Within Standard Range (0–15% above baseline)
+  if (score <= 49) return "#EF4444"; // red   — High Variance Index (>40% above baseline)
+  if (score <= 84) return "#F59E0B"; // amber — Moderate Deviation (16–40% above baseline)
+  return "#10B981"; // green — Within Standard Range (0–15% above baseline)
 }
 
 /** Neutral, data-driven deviation tier labels — no accusatory language */
@@ -110,8 +110,16 @@ export function TrustScoreGauge({
   const subColor = dark ? "rgba(255,255,255,0.5)" : "#64748B";
 
   return (
-    <div className="relative inline-flex items-center justify-center" style={{ width: size, height: size }}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ transform: "rotate(0deg)" }}>
+    <div
+      className="relative inline-flex items-center justify-center"
+      style={{ width: size, height: size }}
+    >
+      <svg
+        width={size}
+        height={size}
+        viewBox={`0 0 ${size} ${size}`}
+        style={{ transform: "rotate(0deg)" }}
+      >
         {/* Track */}
         <path
           d={trackPath}
@@ -130,7 +138,9 @@ export function TrustScoreGauge({
           strokeDasharray={arcLength}
           strokeDashoffset={offset}
           style={{
-            transition: animated ? "stroke-dashoffset 0.05s linear, stroke 0.3s ease" : "none",
+            transition: animated
+              ? "stroke-dashoffset 0.05s linear, stroke 0.3s ease"
+              : "none",
             filter: `drop-shadow(0 0 8px ${color}60)`,
           }}
         />

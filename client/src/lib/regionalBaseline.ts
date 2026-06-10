@@ -36,7 +36,7 @@ export interface BaselineEntry {
   materialMarkupRange: [number, number];
   /** Variance tier thresholds (%) — deviation from jobCostRange high end */
   varianceTiers: {
-    withinStandard: number;   // 0 to this % = green
+    withinStandard: number; // 0 to this % = green
     moderateDeviation: number; // withinStandard+1 to this % = yellow
     // above moderateDeviation = red (High Variance Index)
   };
@@ -58,7 +58,8 @@ export const REGIONAL_BASELINES: BaselineEntry[] = [
     jobCostRange: [5800, 8500],
     materialMarkupRange: [15, 20],
     varianceTiers: { withinStandard: 15, moderateDeviation: 40 },
-    notes: "Includes equipment, labor, refrigerant, and permit. Excludes ductwork replacement. Seasonal demand surges (Jun–Aug) may add 8–12% to labor.",
+    notes:
+      "Includes equipment, labor, refrigerant, and permit. Excludes ductwork replacement. Seasonal demand surges (Jun–Aug) may add 8–12% to labor.",
   },
   {
     jobType: "HVAC System Replacement (3–5 ton residential)",
@@ -69,7 +70,8 @@ export const REGIONAL_BASELINES: BaselineEntry[] = [
     jobCostRange: [5200, 7800],
     materialMarkupRange: [15, 20],
     varianceTiers: { withinStandard: 15, moderateDeviation: 40 },
-    notes: "Tucson market runs 8–12% below Phoenix metro due to lower overhead costs.",
+    notes:
+      "Tucson market runs 8–12% below Phoenix metro due to lower overhead costs.",
   },
   {
     jobType: "HVAC Repair (capacitor, contactor, refrigerant recharge)",
@@ -80,7 +82,8 @@ export const REGIONAL_BASELINES: BaselineEntry[] = [
     jobCostRange: [150, 650],
     materialMarkupRange: [20, 35],
     varianceTiers: { withinStandard: 15, moderateDeviation: 40 },
-    notes: "Refrigerant recharge (R-410A) adds $100–$200. Dispatch fee should be waived or credited toward repair cost.",
+    notes:
+      "Refrigerant recharge (R-410A) adds $100–$200. Dispatch fee should be waived or credited toward repair cost.",
   },
   {
     jobType: "HVAC Diagnostic / Service Call",
@@ -91,7 +94,8 @@ export const REGIONAL_BASELINES: BaselineEntry[] = [
     jobCostRange: [75, 150],
     materialMarkupRange: [0, 0],
     varianceTiers: { withinStandard: 15, moderateDeviation: 40 },
-    notes: "Conditional Diagnostic Premium trigger: fee NOT waived upon repair = flag as CDP.",
+    notes:
+      "Conditional Diagnostic Premium trigger: fee NOT waived upon repair = flag as CDP.",
   },
 
   // ─── PLUMBING ────────────────────────────────────────────────────────────────
@@ -104,7 +108,8 @@ export const REGIONAL_BASELINES: BaselineEntry[] = [
     jobCostRange: [1400, 2200],
     materialMarkupRange: [15, 25],
     varianceTiers: { withinStandard: 15, moderateDeviation: 40 },
-    notes: "Includes unit, labor, expansion tank, and permit. Tankless units add $800–$1,500.",
+    notes:
+      "Includes unit, labor, expansion tank, and permit. Tankless units add $800–$1,500.",
   },
   {
     jobType: "Water Heater Replacement (40–50 gal tank, standard)",
@@ -126,7 +131,8 @@ export const REGIONAL_BASELINES: BaselineEntry[] = [
     jobCostRange: [150, 500],
     materialMarkupRange: [10, 20],
     varianceTiers: { withinStandard: 15, moderateDeviation: 40 },
-    notes: "Hydro-jetting (camera + jetting) ranges $350–$700. Camera-only inspection: $100–$250.",
+    notes:
+      "Hydro-jetting (camera + jetting) ranges $350–$700. Camera-only inspection: $100–$250.",
   },
   {
     jobType: "Toilet Replacement (standard residential)",
@@ -137,7 +143,8 @@ export const REGIONAL_BASELINES: BaselineEntry[] = [
     jobCostRange: [350, 700],
     materialMarkupRange: [15, 25],
     varianceTiers: { withinStandard: 15, moderateDeviation: 40 },
-    notes: "Includes unit and labor. High-efficiency or comfort-height units add $100–$200.",
+    notes:
+      "Includes unit and labor. High-efficiency or comfort-height units add $100–$200.",
   },
   {
     jobType: "Slab Leak Detection & Repair",
@@ -148,7 +155,8 @@ export const REGIONAL_BASELINES: BaselineEntry[] = [
     jobCostRange: [1800, 4500],
     materialMarkupRange: [15, 25],
     varianceTiers: { withinStandard: 15, moderateDeviation: 40 },
-    notes: "High variance job type. Detection alone: $200–$400. Epoxy pipe lining adds $1,000–$3,000.",
+    notes:
+      "High variance job type. Detection alone: $200–$400. Epoxy pipe lining adds $1,000–$3,000.",
   },
 
   // ─── ELECTRICAL ──────────────────────────────────────────────────────────────
@@ -161,7 +169,8 @@ export const REGIONAL_BASELINES: BaselineEntry[] = [
     jobCostRange: [2500, 4000],
     materialMarkupRange: [15, 20],
     varianceTiers: { withinStandard: 15, moderateDeviation: 40 },
-    notes: "Includes panel, labor, and permit. Utility company coordination may add 1–2 weeks.",
+    notes:
+      "Includes panel, labor, and permit. Utility company coordination may add 1–2 weeks.",
   },
   {
     jobType: "Outlet / Switch Replacement",
@@ -172,7 +181,8 @@ export const REGIONAL_BASELINES: BaselineEntry[] = [
     jobCostRange: [100, 300],
     materialMarkupRange: [20, 35],
     varianceTiers: { withinStandard: 15, moderateDeviation: 40 },
-    notes: "GFCI outlets add $25–$50 per unit. Aluminum wiring remediation is a separate, higher-cost job.",
+    notes:
+      "GFCI outlets add $25–$50 per unit. Aluminum wiring remediation is a separate, higher-cost job.",
   },
 
   // ─── ROOFING ─────────────────────────────────────────────────────────────────
@@ -185,7 +195,8 @@ export const REGIONAL_BASELINES: BaselineEntry[] = [
     jobCostRange: [8500, 14000],
     materialMarkupRange: [15, 25],
     varianceTiers: { withinStandard: 15, moderateDeviation: 40 },
-    notes: "Tile roofing adds 30–50%. Post-storm demand surges may add 10–20% to labor.",
+    notes:
+      "Tile roofing adds 30–50%. Post-storm demand surges may add 10–20% to labor.",
   },
   {
     jobType: "Roof Repair (patch, flashing, minor leak)",
@@ -196,7 +207,8 @@ export const REGIONAL_BASELINES: BaselineEntry[] = [
     jobCostRange: [300, 1200],
     materialMarkupRange: [20, 35],
     varianceTiers: { withinStandard: 15, moderateDeviation: 40 },
-    notes: "Inspection fee should be credited toward repair. Full replacement recommendation on a repairable roof is a High Variance Index signal.",
+    notes:
+      "Inspection fee should be credited toward repair. Full replacement recommendation on a repairable roof is a High Variance Index signal.",
   },
 ];
 
@@ -210,7 +222,7 @@ export function findBaseline(
 ): BaselineEntry | undefined {
   const normalized = jobType.toLowerCase();
   return REGIONAL_BASELINES.find(
-    (b) =>
+    b =>
       b.region === region &&
       b.jobType.toLowerCase().includes(normalized.split(" ")[0])
   );
@@ -251,13 +263,15 @@ export function getVarianceTier(deviationPercent: number): {
       tier: "moderate_deviation",
       label: "Moderate Deviation",
       color: "#F59E0B",
-      uiText: "Ancillary cost variance detected. Line-item premiums exceed standard regional averages.",
+      uiText:
+        "Ancillary cost variance detected. Line-item premiums exceed standard regional averages.",
     };
   }
   return {
     tier: "high_variance_index",
     label: "High Variance Index",
     color: "#EF4444",
-    uiText: "Significant pricing variance. Documented costs reflect a high baseline deviation index.",
+    uiText:
+      "Significant pricing variance. Documented costs reflect a high baseline deviation index.",
   };
 }

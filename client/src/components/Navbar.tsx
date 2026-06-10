@@ -42,9 +42,7 @@ export function Navbar() {
     <nav
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled
-          ? "rgba(15,23,42,0.95)"
-          : "rgba(15,23,42,0.85)",
+        background: scrolled ? "rgba(15,23,42,0.95)" : "rgba(15,23,42,0.85)",
         backdropFilter: "blur(12px)",
         borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
       }}
@@ -79,20 +77,26 @@ export function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
+          {navLinks.map(link => (
             <button
               key={link.label}
               onClick={() => scrollTo(link.href, link.isRoute)}
               className="text-sm transition-colors duration-150"
               style={{
-                color: link.subtle ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.75)",
+                color: link.subtle
+                  ? "rgba(255,255,255,0.4)"
+                  : "rgba(255,255,255,0.75)",
                 fontFamily: "'Inter', sans-serif",
               }}
-              onMouseEnter={(e) =>
-                ((e.target as HTMLElement).style.color = link.subtle ? "rgba(255,255,255,0.6)" : "white")
+              onMouseEnter={e =>
+                ((e.target as HTMLElement).style.color = link.subtle
+                  ? "rgba(255,255,255,0.6)"
+                  : "white")
               }
-              onMouseLeave={(e) =>
-                ((e.target as HTMLElement).style.color = link.subtle ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.75)")
+              onMouseLeave={e =>
+                ((e.target as HTMLElement).style.color = link.subtle
+                  ? "rgba(255,255,255,0.4)"
+                  : "rgba(255,255,255,0.75)")
               }
             >
               {link.label}
@@ -105,9 +109,16 @@ export function Navbar() {
           <button
             onClick={() => navigate("/dashboard")}
             className="text-sm transition-colors duration-150"
-            style={{ color: "rgba(255,255,255,0.65)", fontFamily: "'Inter', sans-serif" }}
-            onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "white")}
-            onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.65)")}
+            style={{
+              color: "rgba(255,255,255,0.65)",
+              fontFamily: "'Inter', sans-serif",
+            }}
+            onMouseEnter={e =>
+              ((e.target as HTMLElement).style.color = "white")
+            }
+            onMouseLeave={e =>
+              ((e.target as HTMLElement).style.color = "rgba(255,255,255,0.65)")
+            }
           >
             Sign in
           </button>
@@ -140,25 +151,36 @@ export function Navbar() {
       {menuOpen && (
         <div
           className="md:hidden border-t"
-          style={{ background: "#0F172A", borderColor: "rgba(255,255,255,0.08)" }}
+          style={{
+            background: "#0F172A",
+            borderColor: "rgba(255,255,255,0.08)",
+          }}
         >
           <div className="container py-4 flex flex-col gap-4">
-            {navLinks.map((link) => (
+            {navLinks.map(link => (
               <button
                 key={link.label}
                 onClick={() => scrollTo(link.href, link.isRoute)}
                 className="text-left text-sm py-1"
                 style={{
-                  color: link.subtle ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.8)",
+                  color: link.subtle
+                    ? "rgba(255,255,255,0.4)"
+                    : "rgba(255,255,255,0.8)",
                   fontFamily: "'Inter', sans-serif",
                 }}
               >
                 {link.label}
               </button>
             ))}
-            <div className="flex gap-3 pt-2 border-t" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+            <div
+              className="flex gap-3 pt-2 border-t"
+              style={{ borderColor: "rgba(255,255,255,0.08)" }}
+            >
               <button
-                onClick={() => { navigate("/dashboard"); setMenuOpen(false); }}
+                onClick={() => {
+                  navigate("/dashboard");
+                  setMenuOpen(false);
+                }}
                 className="text-sm"
                 style={{ color: "rgba(255,255,255,0.65)" }}
               >
