@@ -58,7 +58,7 @@ const PLANS = [
     target: "Homeowners · Single Properties",
     features: [
       "Upload one estimate or invoice",
-      "Instant AI-powered Trust Score",
+      "Instant AI-powered Variance Analysis",
       "Line-by-line market price comparison",
       "Negotiation script tailored to your job",
       "PDF report download",
@@ -135,7 +135,7 @@ const PLANS = [
       "Priority listing in contractor directory",
       "Lead generation from homeowner searches",
       "Business analytics dashboard",
-      "Dispute & respond to Trust Score findings",
+      "Dispute & respond to Variance Analysis findings",
       "Dedicated account manager",
       "Phone + email support",
       "Unlimited team seats",

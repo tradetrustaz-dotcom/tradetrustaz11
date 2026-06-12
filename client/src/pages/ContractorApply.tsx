@@ -318,7 +318,7 @@ export default function ContractorApply() {
                     style={{ color: "#7C3A1E", fontFamily: "'Inter', sans-serif" }}
                   >
                     <strong>Important:</strong> Submission of falsified or altered invoices constitutes
-                    fraud and will result in immediate membership termination and referral to the
+                    will result in immediate membership termination and referral to the
                     Arizona Registrar of Contractors and appropriate law enforcement authorities.
                   </p>
                 </div>

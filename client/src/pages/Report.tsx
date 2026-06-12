@@ -10,7 +10,9 @@ import {
   TrendingDown, ChevronDown, ChevronUp, Copy, Check, Clock, MapPin
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { TrustScoreGauge } from "@/components/TrustScoreGauge";
+import { VarianceGauge } from "@/components/VarianceGauge";
+
+import { ReviewWordColumnSystem } from "@/components/ReviewWordColumnSystem";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import { toast } from "sonner";
 
@@ -55,7 +57,7 @@ const REPORT_DATA: Record<string, {
       { label: "Materials", yours: 2400, fairLow: 800, fairHigh: 1200 },
       { label: "Permit & Misc", yours: 1200, fairLow: 700, fairHigh: 700 },
     ],
-    methodology: "The Trust Score combines six weighted factors: Pricing Fairness (40%), Review Language Patterns (20%), Court/BBB/Legal History (15%), Company Longevity (15%), Complaint Response Rate (10%), and Hidden Ownership Signals (qualitative). Pricing data is sourced from public permit records, contractor databases, and aggregated quote data from Arizona homeowners. All data is for informational purposes only.",
+    methodology: "Variance Analysis combines six weighted factors: Pricing Fairness (40%), Review Language Patterns (20%), Court/BBB/Legal History (15%), Company Longevity (15%), Complaint Response Rate (10%), and Hidden Ownership Signals (qualitative). Pricing data is sourced from public permit records, contractor databases, and aggregated quote data from Arizona homeowners. All data is for informational purposes only.",
   },
   "water-heater-tucson-1": {
     title: "Water Heater Replacement",
@@ -80,7 +82,7 @@ const REPORT_DATA: Record<string, {
       { label: "Materials", yours: 350, fairLow: 150, fairHigh: 200 },
       { label: "Misc", yours: 150, fairLow: 100, fairHigh: 100 },
     ],
-    methodology: "The Trust Score combines six weighted factors: Pricing Fairness (40%), Review Language Patterns (20%), Court/BBB/Legal History (15%), Company Longevity (15%), Complaint Response Rate (10%), and Hidden Ownership Signals (qualitative). Pricing data is sourced from public permit records, contractor databases, and aggregated quote data from Arizona homeowners. All data is for informational purposes only.",
+    methodology: "Variance Analysis combines six weighted factors: Pricing Fairness (40%), Review Language Patterns (20%), Court/BBB/Legal History (15%), Company Longevity (15%), Complaint Response Rate (10%), and Hidden Ownership Signals (qualitative). Pricing data is sourced from public permit records, contractor databases, and aggregated quote data from Arizona homeowners. All data is for informational purposes only.",
   },
   "electrical-phoenix-1": {
     title: "Electrical Panel Upgrade",
@@ -106,7 +108,7 @@ const REPORT_DATA: Record<string, {
       { label: "Permits", yours: 350, fairLow: 300, fairHigh: 400 },
       { label: "Materials", yours: 250, fairLow: 200, fairHigh: 300 },
     ],
-    methodology: "The Trust Score combines six weighted factors: Pricing Fairness (40%), Review Language Patterns (20%), Court/BBB/Legal History (15%), Company Longevity (15%), Complaint Response Rate (10%), and Hidden Ownership Signals (qualitative). Pricing data is sourced from public permit records, contractor databases, and aggregated quote data from Arizona homeowners. All data is for informational purposes only.",
+    methodology: "Variance Analysis combines six weighted factors: Pricing Fairness (40%), Review Language Patterns (20%), Court/BBB/Legal History (15%), Company Longevity (15%), Complaint Response Rate (10%), and Hidden Ownership Signals (qualitative). Pricing data is sourced from public permit records, contractor databases, and aggregated quote data from Arizona homeowners. All data is for informational purposes only.",
   },
   "roofing-mesa-1": {
     title: "Roof Replacement",
@@ -132,7 +134,7 @@ const REPORT_DATA: Record<string, {
       { label: "Permits", yours: 800, fairLow: 600, fairHigh: 800 },
       { label: "Misc", yours: 700, fairLow: 700, fairHigh: 900 },
     ],
-    methodology: "The Trust Score combines six weighted factors: Pricing Fairness (40%), Review Language Patterns (20%), Court/BBB/Legal History (15%), Company Longevity (15%), Complaint Response Rate (10%), and Hidden Ownership Signals (qualitative). Pricing data is sourced from public permit records, contractor databases, and aggregated quote data from Arizona homeowners. All data is for informational purposes only.",
+    methodology: "Variance Analysis combines six weighted factors: Pricing Fairness (40%), Review Language Patterns (20%), Court/BBB/Legal History (15%), Company Longevity (15%), Complaint Response Rate (10%), and Hidden Ownership Signals (qualitative). Pricing data is sourced from public permit records, contractor databases, and aggregated quote data from Arizona homeowners. All data is for informational purposes only.",
   },
 };
 
@@ -238,10 +240,10 @@ export default function Report() {
           className="rounded-2xl p-8 mb-8 flex flex-col sm:flex-row items-center gap-8"
           style={{ background: "#0F172A" }}
         >
-          <TrustScoreGauge score={report.score} size={180} dark animated />
+          <VarianceGauge index={report.score} size={180} dark animated />
           <div className="flex-1 text-center sm:text-left">
             <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "'Space Grotesk', sans-serif" }}>
-              Trust Score Summary
+              Variance Analysis Summary
             </p>
             <div className="flex flex-wrap gap-6 mb-4 justify-center sm:justify-start">
               <div>
@@ -369,6 +371,33 @@ export default function Report() {
           </div>
         </div>
 
+        {/* Review Word Column System Integration */}
+        <div
+          className="p-8 rounded-2xl mb-8"
+          style={{ background: "white", boxShadow: "0 2px 24px rgba(15,23,42,0.08)" }}
+        >
+          <h3 className="text-xl font-bold mb-6" style={{ color: "#0F172A", fontFamily: "'Space Grotesk', sans-serif" }}>
+            Review Pattern Analysis
+          </h3>
+          <ReviewWordColumnSystem 
+            tokens={[
+              { word: "expensive", count: 3, review_indices: [0, 1, 4] },
+              { word: "contractor", count: 2, review_indices: [2, 3] },
+              { word: "slow", count: 2, review_indices: [0, 5] },
+              { word: "variance", count: 1, review_indices: [1] },
+              { word: "documentation", count: 1, review_indices: [3] }
+            ]}
+            rawReviews={[
+              "The work was fine but the pricing was expensive compared to other quotes.",
+              "Found a significant pricing variance after the job was completed.",
+              "Contractor arrived late but did a good job overall.",
+              "Documentation was provided but the contractor was difficult to reach.",
+              "Very expensive service for what was provided.",
+              "The process was slow but the final result was acceptable."
+            ]}
+          />
+        </div>
+
         {/* Negotiation script */}
         <div
           className="p-6 rounded-2xl mb-8"
@@ -403,7 +432,32 @@ export default function Report() {
           </p>
         </div>
 
-        {/* How we calculate this */}
+        {/* Review Word Column System */}
+        <div className="mb-8">
+          <ReviewWordColumnSystem
+            tokens={[
+              { word: "expensive", count: 3, review_indices: [0, 1, 3] },
+              { word: "charged", count: 2, review_indices: [0, 2] },
+              { word: "slow", count: 1, review_indices: [1] },
+              { word: "slower", count: 1, review_indices: [1] },
+              { word: "contractor", count: 1, review_indices: [2] },
+              { word: "contractors", count: 1, review_indices: [3] },
+              { word: "refund", count: 1, review_indices: [0] },
+              { word: "refunded", count: 1, review_indices: [1] },
+              { word: "refunds", count: 1, review_indices: [2] },
+              { word: "scam", count: 1, review_indices: [0] },
+              { word: "scams", count: 1, review_indices: [1] },
+            ]}
+            rawReviews={[
+              "The contractor charged me an expensive amount and refused a refund.",
+              "The service was slow and even slower than expected. I was refunded partially.",
+              "This charged contractor did not provide the refunds as promised.",
+              "Many contractors are expensive, but this one was the worst. They are running scams.",
+            ]}
+          />
+        </div>
+
+        {/* How we calculate this index*/}
         <div
           className="rounded-2xl overflow-hidden mb-8"
           style={{ background: "white", boxShadow: "0 2px 24px rgba(15,23,42,0.07)" }}
@@ -415,7 +469,7 @@ export default function Report() {
             onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "transparent")}
           >
             <span className="font-semibold" style={{ color: "#0F172A", fontFamily: "'Space Grotesk', sans-serif" }}>
-              How we calculate this score
+              How we calculate this index
             </span>
             {methodOpen ? <ChevronUp className="w-5 h-5" style={{ color: "#94A3B8" }} /> : <ChevronDown className="w-5 h-5" style={{ color: "#94A3B8" }} />}
           </button>
@@ -446,11 +500,8 @@ export default function Report() {
           className="p-5 rounded-xl text-xs leading-relaxed space-y-3 mb-4"
           style={{ background: "#F1F5F9", border: "1px solid #E2E8F0", fontFamily: "'Inter', sans-serif", color: "#64748B" }}
         >
-          <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "#14B8A6", fontFamily: "'Space Grotesk', sans-serif" }}>Legal Disclaimer</p>
-          <p>This platform provides automated price-validation analysis based on regional market averages, historical data baselines, and standard trade pricing structures. The reports, scores, and data visualizations generated by this tool are intended solely for informational, educational, and consumer advocacy purposes. They do not constitute formal legal advice, contract audits, or definitive regulatory findings.</p>
-          <p>The variances identified herein represent deviations from statistical pricing norms and should not be interpreted as definitive evidence of fraud, intentional overcharging, or unlawful business practices by any listed contractor or technician. Users are encouraged to verify all line items, labor rates, and material costs directly with their service providers.</p>
-          <p>TradeTrust AZ does not guarantee the absolute accuracy of third-party invoice data extraction and assumes no liability for actions taken, or agreements entered into, based on the outputs of this software. Local market conditions, emergency service premiums, and specialized project complexities may justify pricing variations that fall outside standard baseline models.</p>
-          <p>By utilizing this platform, you acknowledge that this analysis is an algorithmic tool designed to assist consumers in negotiating fair market rates and understanding trade billing transparently. For formal disputes or binding legal assessments, users should consult with qualified legal counsel or licensed construction professionals in their respective jurisdictions.</p>
+          <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "#14B8A6", fontFamily: "'Space Grotesk', sans-serif" }}>Required Disclaimer</p>
+          <p className="font-bold">“Informational Triage Only. TradeTrust AZ provides source comparison, public record references, and variance analysis for educational and informational purposes only. TradeTrust AZ does not assign contractor ratings, rankings, legal conclusions, compliance determinations, endorsements, or accusations. Independent verification is recommended.”</p>
         </div>
       </div>
     </div>

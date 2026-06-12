@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
 import { DemoModal } from "@/components/DemoModal";
-import { TrustScoreGauge } from "@/components/TrustScoreGauge";
+import { VarianceGauge } from "@/components/VarianceGauge";
 
 // ─── Intersection observer hook for fade-up animations ───────────────────────
 function useFadeIn(threshold = 0.15) {
@@ -31,11 +31,11 @@ function useFadeIn(threshold = 0.15) {
 
 // ─── Score factor data ────────────────────────────────────────────────────────
 const SCORE_FACTORS = [
-  { label: "Pricing Fairness", weight: 40, desc: "Line-by-line comparison to current AZ market rates", color: "#14B8A6" },
-  { label: "Review Language Patterns", weight: 20, desc: "Specific phrases customers use when they identify billing variances", color: "#14B8A6" },
-  { label: "Court, BBB & Legal History", weight: 15, desc: "Public records of complaints and legal actions", color: "#14B8A6" },
-  { label: "Company Longevity & Stability", weight: 15, desc: "How long the business has operated and under what names", color: "#14B8A6" },
-  { label: "Response Rate to Complaints", weight: 10, desc: "How the contractor handles disputes and negative feedback", color: "#14B8A6" },
+  { label: "Pricing Variance", weight: 40, desc: "Line-by-line comparison to current AZ market rates", color: "#14B8A6" },
+  { label: "Exact Word Column", weight: 20, desc: "Specific phrases customers use when they identify billing variances", color: "#14B8A6" },
+  { label: "Public Record Reference", weight: 15, desc: "Public records of complaints and legal actions", color: "#14B8A6" },
+  { label: "Operational History", weight: 15, desc: "How long the business has operated and under what names", color: "#14B8A6" },
+  { label: "Informational Triage", weight: 10, desc: "How the contractor handles disputes and negative feedback", color: "#14B8A6" },
 ];
 
 // ─── Vignette stories ─────────────────────────────────────────────────────────
@@ -130,7 +130,7 @@ export default function Home() {
                 }}
               >
                 Upload Your Contractor Quote.{" "}
-                <span style={{ color: "#14B8A6" }}>Get the Real Truth</span>{" "}
+                <span style={{ color: "#14B8A6" }}>Get Independent Variance Data</span>{" "}
                 in 30 Seconds.
               </h1>
 
@@ -153,7 +153,7 @@ export default function Home() {
                   }}
                 >
                   <Upload className="w-4 h-4 mr-2" />
-                  Upload Quote & See Your Score — Free
+                  Upload Quote & View Variance Analysis — Free
                 </Button>
                 <Button
                   variant="outline"
@@ -209,11 +209,11 @@ export default function Home() {
                   className="absolute bottom-4 left-4 right-4 flex items-center gap-3 p-3 rounded-xl"
                   style={{ background: "rgba(15,23,42,0.88)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.1)" }}
                 >
-                  <TrustScoreGauge score={34} size={56} strokeWidth={5} dark animated showLabel={false} />
+                  <VarianceGauge index={34} size={56} strokeWidth={5} dark animated showLabel={false} />
                   <div>
                     <p className="text-white text-sm font-bold" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>HVAC Quote · Phoenix</p>
                     <p className="text-xs" style={{ color: "rgba(255,255,255,0.65)" }}>$19,800 quoted · ~$6,500 fair</p>
-                    <p className="text-xs font-semibold mt-0.5" style={{ color: "#F97316" }}>Score: 34/100 — Overpriced</p>
+                    <p className="text-xs font-semibold mt-0.5" style={{ color: "#F97316" }}>Variance: 133% above baseline</p>
                   </div>
                 </div>
               </div>
@@ -224,7 +224,7 @@ export default function Home() {
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
               >
                 {[
-                  { val: "34", label: "Trust Score", color: "#F97316" },
+                  { val: "34", label: "Variance Analysis", color: "#F97316" },
                   { val: "$13.3k", label: "Potential savings", color: "#14B8A6" },
                   { val: "30s", label: "Analysis time", color: "rgba(255,255,255,0.7)" },
                 ].map((s) => (
@@ -286,8 +286,8 @@ export default function Home() {
                 {
                   step: "03",
                   icon: <BarChart2 className="w-7 h-7" style={{ color: "#14B8A6" }} />,
-                  title: "Get Your Trust Score",
-                  desc: "A clean 1–100 score with full pricing breakdown, red flags, and a negotiation script.",
+                  title: "View Variance Analysis",
+                  desc: "A clean 1–100 index with full pricing breakdown, red flags, and a negotiation script.",
                   note: null,
                 },
               ].map((item, i) => (
@@ -328,7 +328,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── TRUST SCORE EXPLAINER ─────────────────────────────────────────────── */}
+      {/* ── VARIANCE ANALYSIS EXPLAINER ─────────────────────────────────────────────── */}
       <section id="trust-score" className="py-24" style={{ background: "#0F172A" }}>
         <div className="container">
           <div
@@ -344,13 +344,13 @@ export default function Home() {
               <div className="flex flex-col items-center gap-8">
                 <div className="flex gap-8 flex-wrap justify-center">
                   <div className="text-center">
-                    <TrustScoreGauge score={34} size={160} dark animated />
+                    <VarianceGauge index={34} size={160} dark animated />
                     <p className="text-sm mt-2" style={{ color: "rgba(255,255,255,0.65)", fontFamily: "'Inter', sans-serif" }}>
                       Overpriced HVAC
                     </p>
                   </div>
                   <div className="text-center">
-                    <TrustScoreGauge score={87} size={160} dark animated />
+                    <VarianceGauge index={87} size={160} dark animated />
                     <p className="text-sm mt-2" style={{ color: "rgba(255,255,255,0.65)", fontFamily: "'Inter', sans-serif" }}>
                       Fair Plumbing Quote
                     </p>
@@ -364,13 +364,13 @@ export default function Home() {
               {/* Right: explanation */}
               <div>
                 <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "#14B8A6", fontFamily: "'Space Grotesk', sans-serif" }}>
-                  The Trust Score
+                  Variance Analysis System
                 </p>
                 <h2 className="text-4xl font-bold text-white mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                  A real 1–100 score — not another star rating
+                  A real 1–100 index — not another star rating
                 </h2>
                 <p className="text-lg mb-8" style={{ color: "rgba(255,255,255,0.65)", fontFamily: "'Inter', sans-serif", lineHeight: 1.7 }}>
-                  We combine six factors. Pricing fairness carries the most weight because that's where most people get screwed.
+                  We combine six factors. Pricing fairness carries the most weight because that's where the most significant variance is often found.
                 </p>
 
                 <div className="space-y-4">
@@ -476,7 +476,7 @@ export default function Home() {
                         {v.city} · {v.job}
                       </p>
                     </div>
-                    <TrustScoreGauge score={v.score} size={64} strokeWidth={6} animated dark showLabel={false} />
+                    <VarianceGauge index={v.score} size={64} strokeWidth={6} animated dark showLabel={false} />
                   </div>
 
                   {/* Body */}
@@ -525,7 +525,7 @@ export default function Home() {
                 Why TradeTrust AZ
               </p>
               <h2 className="text-4xl font-bold text-white mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                Other sites look at stars. We read the actual numbers.
+                Other sites use simplified ratings. We provide detailed variance analysis.
               </h2>
             </div>
 
@@ -672,7 +672,7 @@ export default function Home() {
               }}
             >
               <Upload className="w-5 h-5 mr-2" />
-              Upload Quote & See Your Score — Free
+              Upload Quote & View Variance Analysis — Free
             </Button>
             <p className="mt-4 text-sm" style={{ color: "rgba(255,255,255,0.55)", fontFamily: "'Inter', sans-serif" }}>
               First analysis is free. No credit card required.
@@ -688,11 +688,8 @@ export default function Home() {
             className="max-w-3xl mx-auto p-6 rounded-2xl text-sm leading-relaxed space-y-4"
             style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", fontFamily: "'Inter', sans-serif", color: "rgba(255,255,255,0.65)" }}
           >
-            <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#14B8A6", fontFamily: "'Space Grotesk', sans-serif" }}>Legal Disclaimer</p>
-            <p>This platform provides automated price-validation analysis based on regional market averages, historical data baselines, and standard trade pricing structures. The reports, scores, and data visualizations generated by this tool are intended solely for informational, educational, and consumer advocacy purposes. They do not constitute formal legal advice, contract audits, or definitive regulatory findings.</p>
-            <p>The variances identified herein represent deviations from statistical pricing norms and should not be interpreted as definitive evidence of fraud, intentional overcharging, or unlawful business practices by any listed contractor or technician. Users are encouraged to verify all line items, labor rates, and material costs directly with their service providers.</p>
-            <p>TradeTrust AZ does not guarantee the absolute accuracy of third-party invoice data extraction and assumes no liability for actions taken, or agreements entered into, based on the outputs of this software. Local market conditions, emergency service premiums, and specialized project complexities may justify pricing variations that fall outside standard baseline models.</p>
-            <p>By utilizing this platform, you acknowledge that this analysis is an algorithmic tool designed to assist consumers in negotiating fair market rates and understanding trade billing transparently. For formal disputes or binding legal assessments, users should consult with qualified legal counsel or licensed construction professionals in their respective jurisdictions.</p>
+            <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: "#14B8A6", fontFamily: "'Space Grotesk', sans-serif" }}>Required Disclaimer</p>
+            <p className="font-bold">“Informational Triage Only. TradeTrust AZ provides source comparison, public record references, and variance analysis for educational and informational purposes only. TradeTrust AZ does not assign contractor ratings, rankings, legal conclusions, compliance determinations, endorsements, or accusations. Independent verification is recommended.”</p>
           </div>
         </div>
       </section>
@@ -767,6 +764,9 @@ export default function Home() {
           </div>
           <p className="text-center text-xs mt-6" style={{ color: "rgba(255,255,255,0.45)", fontFamily: "'Inter', sans-serif" }}>
             © 2025 TradeTrust AZ. All rights reserved.
+          </p>
+          <p className="text-center text-xs mt-2 leading-relaxed" style={{ color: "rgba(255,255,255,0.45)", fontFamily: "'Inter', sans-serif" }}>
+            Informational Triage Only. TradeTrust AZ provides source comparison, public record references, and variance analysis for educational and informational purposes only. TradeTrust AZ does not assign contractor ratings, rankings, legal conclusions, compliance determinations, endorsements, or accusations. Independent verification is recommended.
           </p>
         </div>
       </footer>

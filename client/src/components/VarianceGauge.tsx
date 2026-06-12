@@ -1,18 +1,18 @@
 /**
- * TrustScoreGauge — Animated circular arc gauge
+ * VarianceGauge — Animated circular arc gauge
  * Design: Precision Trust — navy background, three-tier Baseline Deviation Percentage scale
  *
- * Variance Scale (maps score → deviation tier):
- *   Green  (#10B981): score 85–100 → 0–15% above regional baseline (Within Standard Range)
- *   Yellow (#F59E0B): score 50–84  → 16–40% above regional baseline (Moderate Deviation)
- *   Red    (#EF4444): score 0–49   → >40% above regional baseline   (High Variance Index)
+ * Variance Scale (maps index → deviation tier):
+ *   Green  (#10B981): index 85–100 → 0–15% above regional baseline (Within Standard Range)
+ *   Yellow (#F59E0B): index 50–84  → 16–40% above regional baseline (Moderate Deviation)
+ *   Red    (#EF4444): index 0–49   → >40% above regional baseline   (High Variance Index)
  *
- * Animates from 0 to score value on mount
+ * Animates from 0 to index value on mount
  */
 import { useEffect, useRef, useState } from "react";
 
-interface TrustScoreGaugeProps {
-  score: number;          // 0–100
+interface VarianceGaugeProps {
+  index: number;          // 0–100
   size?: number;          // px diameter, default 200
   strokeWidth?: number;   // default 14
   animated?: boolean;     // default true
@@ -21,34 +21,34 @@ interface TrustScoreGaugeProps {
 }
 
 /**
- * Maps a 0–100 trust score to the three-tier Baseline Deviation Percentage color.
- * High score = low variance = green. Low score = high variance = red.
+ * Maps a 0–100 variance index to the three-tier Baseline Deviation Percentage color.
+ * High index = low variance = green. Low index = high variance = red.
  */
-function getScoreColor(score: number) {
-  if (score <= 49) return "#EF4444";   // red   — High Variance Index (>40% above baseline)
-  if (score <= 84) return "#F59E0B";   // amber — Moderate Deviation (16–40% above baseline)
+function getScoreColor(index: number) {
+  if (index <= 49) return "#EF4444";   // red   — High Variance Index (>40% above baseline)
+  if (index <= 84) return "#F59E0B";   // amber — Moderate Deviation (16–40% above baseline)
   return "#10B981";                    // green — Within Standard Range (0–15% above baseline)
 }
 
-/** Neutral, data-driven deviation tier labels — no accusatory language */
-function getScoreLabel(score: number) {
-  if (score <= 25) return "High Variance";
-  if (score <= 49) return "Elevated Deviation";
-  if (score <= 69) return "Moderate Deviation";
-  if (score <= 84) return "Low Deviation";
-  if (score <= 94) return "Within Baseline";
+/** Neutral, data-driven deviation tier labels */
+function getScoreLabel(index: number) {
+  if (index <= 25) return "High Variance Index";
+  if (index <= 49) return "Pricing Variance Observed";
+  if (index <= 69) return "Moderate Variance Noted";
+  if (index <= 84) return "Low Variance Noted";
+  if (index <= 94) return "Within Baseline Range";
   return "Baseline Aligned";
 }
 
-export function TrustScoreGauge({
-  score,
+export function VarianceGauge({
+  index,
   size = 200,
   strokeWidth = 14,
   animated = true,
   showLabel = true,
   dark = true,
-}: TrustScoreGaugeProps) {
-  const [displayScore, setDisplayScore] = useState(animated ? 0 : score);
+}: VarianceGaugeProps) {
+  const [displayScore, setDisplayScore] = useState(animated ? 0 : index);
   const animRef = useRef<number | null>(null);
   const startTimeRef = useRef<number | null>(null);
   const duration = 1400;
@@ -78,7 +78,7 @@ export function TrustScoreGauge({
 
   const trackPath = `M ${start.x} ${start.y} A ${radius} ${radius} 0 1 1 ${end.x} ${end.y}`;
 
-  // Animate score counter
+  // Animate index counter
   useEffect(() => {
     if (!animated) return;
     const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -87,7 +87,7 @@ export function TrustScoreGauge({
       if (!startTimeRef.current) startTimeRef.current = timestamp;
       const elapsed = timestamp - startTimeRef.current;
       const progress = Math.min(elapsed / duration, 1);
-      setDisplayScore(Math.round(easeOut(progress) * score));
+      setDisplayScore(Math.round(easeOut(progress) * index));
       if (progress < 1) {
         animRef.current = requestAnimationFrame(step);
       }
@@ -101,10 +101,10 @@ export function TrustScoreGauge({
       clearTimeout(timer);
       if (animRef.current) cancelAnimationFrame(animRef.current);
     };
-  }, [score, animated]);
+  }, [index, animated]);
 
   const color = getScoreColor(displayScore);
-  const label = getScoreLabel(score);
+  const label = getScoreLabel(index);
   const trackColor = dark ? "rgba(255,255,255,0.08)" : "rgba(15,23,42,0.1)";
   const textColor = dark ? "white" : "#0F172A";
   const subColor = dark ? "rgba(255,255,255,0.5)" : "#64748B";

@@ -84,37 +84,45 @@ export function ConsumerTriageChecklist({
 }: Props) {
   const [responses, setResponses] = useState<TriageResponses>(EMPTY_RESPONSES);
   const [tosAccepted, setTosAccepted] = useState(false);
+  const [ageVerified, setAgeVerified] = useState(false);
 
   const answeredCount = Object.values(responses).filter((v) => v !== null).length;
   const yesCount = Object.values(responses).filter((v) => v === true).length;
   const allAnswered = answeredCount === 5;
 
-  const canProceed = allAnswered && (!showClickWrap || tosAccepted);
+  const canProceed = allAnswered && (!showClickWrap || (tosAccepted && ageVerified));
 
   const riskLevel =
     yesCount === 0
-      ? { label: "No Flags Detected", color: "#22C55E", bg: "rgba(34,197,94,0.1)", icon: <ShieldCheck className="w-5 h-5" /> }
+      ? { label: "Variance Noted: None", color: "#22C55E", bg: "rgba(34,197,94,0.1)", icon: <ShieldCheck className="w-5 h-5" /> }
       : yesCount === 1
-      ? { label: "Low Risk — 1 Flag", color: "#84CC16", bg: "rgba(132,204,22,0.1)", icon: <ShieldCheck className="w-5 h-5" /> }
+      ? { label: "Variance Noted: Low", color: "#84CC16", bg: "rgba(132,204,22,0.1)", icon: <ShieldCheck className="w-5 h-5" /> }
       : yesCount === 2
-      ? { label: "Moderate Risk — 2 Flags", color: "#F59E0B", bg: "rgba(245,158,11,0.1)", icon: <AlertTriangle className="w-5 h-5" /> }
+      ? { label: "Variance Noted: Moderate", color: "#F59E0B", bg: "rgba(245,158,11,0.1)", icon: <AlertTriangle className="w-5 h-5" /> }
       : yesCount === 3
-      ? { label: "High Risk — 3 Flags", color: "#F97316", bg: "rgba(249,115,22,0.1)", icon: <AlertTriangle className="w-5 h-5" /> }
-      : { label: `Critical Risk — ${yesCount}/5 Tactics Detected`, color: "#EF4444", bg: "rgba(239,68,68,0.1)", icon: <ShieldAlert className="w-5 h-5" /> };
+      ? { label: "Variance Noted: High", color: "#F97316", bg: "rgba(249,115,22,0.1)", icon: <AlertTriangle className="w-5 h-5" /> }
+      : { label: `Variance Observed: ${yesCount}/5 Points`, color: "#EF4444", bg: "rgba(239,68,68,0.1)", icon: <ShieldAlert className="w-5 h-5" /> };
 
   const setAnswer = (key: keyof TriageResponses, value: boolean) => {
     const next = { ...responses, [key]: value };
     setResponses(next);
     const nextAnswered = Object.values(next).filter((v) => v !== null).length;
-    if (nextAnswered === 5 && onComplete && (!showClickWrap || tosAccepted)) {
+    if (nextAnswered === 5 && onComplete && (!showClickWrap || (tosAccepted && ageVerified))) {
       onComplete(next, tosAccepted);
     }
   };
 
   const handleTosChange = (checked: boolean) => {
     setTosAccepted(checked);
-    if (allAnswered && checked && onComplete) {
+    if (allAnswered && checked && ageVerified && onComplete) {
       onComplete(responses, checked);
+    }
+  };
+
+  const handleAgeChange = (checked: boolean) => {
+    setAgeVerified(checked);
+    if (allAnswered && tosAccepted && checked && onComplete) {
+      onComplete(responses, tosAccepted);
     }
   };
 
@@ -134,7 +142,7 @@ export function ConsumerTriageChecklist({
             style={{ color: "#64748B", fontFamily: "'Inter', sans-serif" }}
           >
             Answer each question based on your on-site experience. Your responses are factored
-            directly into your Trust Score.
+            directly into your Variance Analysis Report.
           </p>
         </div>
       )}
@@ -258,50 +266,76 @@ export function ConsumerTriageChecklist({
 
       {/* Click-wrap agreement */}
       {showClickWrap && (
-        <div
-          className="rounded-xl p-4"
-          style={{
-            background: tosAccepted ? "rgba(20,184,166,0.06)" : "rgba(15,23,42,0.03)",
-            border: `1px solid ${tosAccepted ? "rgba(20,184,166,0.3)" : "rgba(15,23,42,0.1)"}`,
-          }}
-        >
-          <label className="flex items-start gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={tosAccepted}
-              onChange={(e) => handleTosChange(e.target.checked)}
-              className="mt-0.5 w-4 h-4 rounded flex-shrink-0"
-              style={{ accentColor: "#14B8A6" }}
-            />
-            <span
-              className="text-xs leading-relaxed"
-              style={{ color: "#334155", fontFamily: "'Inter', sans-serif" }}
-            >
-              I certify that the answers provided above are accurate to my on-site experience and
-              agree to the{" "}
-              <Link
-                href="/legal/tos"
-                target="_blank"
-                className="underline font-medium inline-flex items-center gap-0.5"
-                style={{ color: "#14B8A6" }}
-                onClick={(e) => e.stopPropagation()}
+        <div className="space-y-3">
+          <div
+            className="rounded-xl p-4"
+            style={{
+              background: tosAccepted ? "rgba(20,184,166,0.06)" : "rgba(15,23,42,0.03)",
+              border: `1px solid ${tosAccepted ? "rgba(20,184,166,0.3)" : "rgba(15,23,42,0.1)"}`,
+            }}
+          >
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={tosAccepted}
+                onChange={(e) => handleTosChange(e.target.checked)}
+                className="mt-0.5 w-4 h-4 rounded flex-shrink-0"
+                style={{ accentColor: "#14B8A6" }}
+              />
+              <span
+                className="text-xs leading-relaxed"
+                style={{ color: "#334155", fontFamily: "'Inter', sans-serif" }}
               >
-                Terms of Service <ExternalLink className="w-3 h-3" />
-              </Link>{" "}
-              and{" "}
-              <Link
-                href="/legal/privacy"
-                target="_blank"
-                className="underline font-medium inline-flex items-center gap-0.5"
-                style={{ color: "#14B8A6" }}
-                onClick={(e) => e.stopPropagation()}
+                I certify that the answers provided above are accurate to my on-site experience and
+                agree to the{" "}
+                <Link
+                  href="/legal/tos"
+                  target="_blank"
+                  className="underline font-medium inline-flex items-center gap-0.5"
+                  style={{ color: "#14B8A6" }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Terms of Service <ExternalLink className="w-3 h-3" />
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/legal/privacy"
+                  target="_blank"
+                  className="underline font-medium inline-flex items-center gap-0.5"
+                  style={{ color: "#14B8A6" }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Privacy Policy <ExternalLink className="w-3 h-3" />
+                </Link>
+                . I understand that this report is for informational purposes only and does not
+                constitute legal advice.
+              </span>
+            </label>
+          </div>
+
+          <div
+            className="rounded-xl p-4"
+            style={{
+              background: ageVerified ? "rgba(20,184,166,0.06)" : "rgba(15,23,42,0.03)",
+              border: `1px solid ${ageVerified ? "rgba(20,184,166,0.3)" : "rgba(15,23,42,0.1)"}`,
+            }}
+          >
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={ageVerified}
+                onChange={(e) => handleAgeChange(e.target.checked)}
+                className="mt-0.5 w-4 h-4 rounded flex-shrink-0"
+                style={{ accentColor: "#14B8A6" }}
+              />
+              <span
+                className="text-xs leading-relaxed"
+                style={{ color: "#334155", fontFamily: "'Inter', sans-serif" }}
               >
-                Privacy Policy <ExternalLink className="w-3 h-3" />
-              </Link>
-              . I understand that this report is for informational purposes only and does not
-              constitute legal advice.
-            </span>
-          </label>
+                I certify that I am 18 years of age or older.
+              </span>
+            </label>
+          </div>
         </div>
       )}
 
@@ -321,7 +355,7 @@ export function ConsumerTriageChecklist({
         >
           {canProceed
             ? "Upload Invoice for Full Verification Audit →"
-            : `Answer all 5 questions${showClickWrap && !tosAccepted ? " and accept Terms" : ""} to continue`}
+            : `Answer all 5 questions${showClickWrap && (!tosAccepted || !ageVerified) ? " and verify age/terms" : ""} to continue`}
         </button>
       )}
     </div>

@@ -6,7 +6,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { X, Upload, FileText, CheckCircle, AlertTriangle, TrendingDown, Clock, Star, Building } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { TrustScoreGauge } from "./TrustScoreGauge";
+import { VarianceGauge } from "./VarianceGauge";
 import { ConsumerTriageChecklist, type TriageResponses } from "./ConsumerTriageChecklist";
 import { useLocation } from "wouter";
 
@@ -31,7 +31,7 @@ const PROCESSING_MESSAGES = [
   "Comparing to 2,847 similar Arizona jobs...",
   "Checking line-item pricing against local market...",
   "Scanning for ancillary cost variances...",
-  "Calculating your Trust Score...",
+  "Analyzing Variance Data...",
 ];
 
 const SAMPLE_REPORTS: Record<string, {
@@ -207,13 +207,13 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
               {step === "upload" && "Try It Now — No Signup Required"}
               {step === "jobtype" && "What type of job is this?"}
               {step === "processing" && "Analyzing your quote..."}
-              {step === "report" && "Your Trust Score Report"}
+              {step === "report" && "Variance Analysis Report"}
             </h2>
             <p className="text-sm mt-0.5" style={{ color: "rgba(255,255,255,0.65)", fontFamily: "'Inter', sans-serif" }}>
               {step === "upload" && "Upload a real quote or use our sample"}
               {step === "jobtype" && "One click — we'll do the rest"}
               {step === "processing" && "This usually takes 15–30 seconds"}
-              {step === "report" && `Sample report · ${report.jobLabel}`}
+              {step === "report" && `Source Comparison · ${report.jobLabel}`}
             </p>
           </div>
           <button
@@ -382,7 +382,7 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
           <div className="p-6 space-y-6">
             {/* Score + summary */}
             <div className="flex flex-col sm:flex-row items-center gap-6 p-6 rounded-xl" style={{ background: "rgba(255,255,255,0.03)" }}>
-              <TrustScoreGauge score={report.score} size={160} dark />
+              <VarianceGauge index={report.score} size={160} dark />
               <div className="flex-1 text-center sm:text-left">
                 <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: "rgba(255,255,255,0.4)" }}>
                   Sample Report · {report.jobLabel}
@@ -457,7 +457,7 @@ export function DemoModal({ open, onClose }: DemoModalProps) {
 
             {/* Disclaimer */}
             <p className="text-xs" style={{ color: "rgba(255,255,255,0.3)", fontFamily: "'Inter', sans-serif" }}>
-              DEMO DATA – NOT A REAL CONTRACTOR RECORD. This is a sample report using illustrative data for demonstration purposes only. The variances shown represent statistical deviations from pricing norms and do not constitute evidence of fraud, intentional overcharging, or unlawful practices by any contractor. Actual analysis uses real Arizona market data sourced from public records. Reports do not constitute legal advice. Local market conditions and project complexities may justify pricing variations outside standard baseline models. For formal disputes, consult qualified legal counsel.
+              DEMO DATA – NOT A REAL CONTRACTOR RECORD. This is a sample report using illustrative data for demonstration purposes only. The variances shown represent statistical deviations from pricing norms and do not constitute evidence of intentional overcharging or unlawful practices by any contractor. Actual analysis uses real Arizona market data sourced from public records. Reports do not constitute legal advice. Local market conditions and project complexities may justify pricing variations outside standard baseline models. For formal disputes, consult qualified legal counsel.
             </p>
 
             {/* CTA */}

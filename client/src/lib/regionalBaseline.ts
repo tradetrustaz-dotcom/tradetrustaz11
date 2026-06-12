@@ -12,7 +12,7 @@
  *   Red    — High Variance Index:    V > 40%     above regional baseline
  *             OR: unitemized bulk sum where labor and materials are completely locked
  *
- * Score mapping (0–100 trust score → deviation tier):
+ * Variance mapping (0–100 index → deviation tier):
  *   85–100 → Within Standard Range  (green,  #10B981)
  *   50–84  → Moderate Deviation     (amber,  #F59E0B)
  *   0–49   → High Variance Index    (red,    #EF4444)
@@ -45,7 +45,7 @@ export interface BaselineEntry {
 
 /**
  * Default baseline database — Phoenix and Tucson metro areas.
- * These values seed the scoring engine until live permit/quote data is ingested.
+ * These values seed the variance analysis engine until live permit/quote data is ingested.
  */
 export const REGIONAL_BASELINES: BaselineEntry[] = [
   // ─── HVAC ───────────────────────────────────────────────────────────────────

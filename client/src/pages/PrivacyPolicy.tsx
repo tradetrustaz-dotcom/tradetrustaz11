@@ -60,24 +60,24 @@ export default function PrivacyPolicy() {
             <LegalSection title="2. Information We Collect">
               <p><strong>2.1 Account Information.</strong> When you create an account, we collect your name, email address, and subscription tier. For Contractor Members, we additionally collect your Arizona contractor license number and trade category.</p>
               <p><strong>2.2 User-Submitted Documents.</strong> When you upload an estimate, invoice, or photograph for analysis, we receive and process that document. See Section 3 for how this data is routed and stored.</p>
-              <p><strong>2.3 Consumer Triage Responses.</strong> The five-question Consumer Triage Checklist collects binary (Yes/No) responses about your on-site experience. These responses are used solely to weight your Trust Score Report and are stored alongside your audit record.</p>
+              <p><strong>2.3 Consumer Triage Responses.</strong> The five-question Consumer Triage Checklist collects binary (Yes/No) responses about your on-site experience. These responses are used solely to weight your Variance Analysis Report and are stored alongside your audit record.</p>
               <p><strong>2.4 Usage Data.</strong> We automatically collect standard server logs including IP address, browser type, pages visited, and timestamps. This data is used for security monitoring and Platform improvement only.</p>
               <p><strong>2.5 Payment Information.</strong> Payment processing is handled entirely by Stripe, Inc. TradeTrust AZ does not receive, store, or process your credit card number or banking information. We receive only a transaction confirmation token from Stripe.</p>
             </LegalSection>
 
             <LegalSection title="3. Data Routing and Storage Architecture">
               <p><strong>3.1 Volatile Memory During Analysis.</strong> When you submit a document for analysis, the document is loaded into local server memory (RAM) for the duration of the analysis process only. This volatile memory is cleared immediately upon completion of the analysis. The raw document binary is never written to permanent disk storage on the analysis server.</p>
-              <p><strong>3.2 PostgreSQL Database Storage.</strong> The following data is written to our PostgreSQL database upon completion of analysis: your account profile, the Trust Score Report output (numerical scores and findings text), your Consumer Triage responses, and metadata about the submitted document (file type, size, submission timestamp). The original document file is not stored in the database.</p>
+              <p><strong>3.2 PostgreSQL Database Storage.</strong> The following data is written to our PostgreSQL database upon completion of analysis: your account profile, the Variance Analysis Report output (numerical index and findings text), your Consumer Triage responses, and metadata about the submitted document (file type, size, submission timestamp). The original document file is not stored in the database.</p>
               <p><strong>3.3 Document Retention.</strong> Uploaded documents are retained in encrypted cloud storage (AWS S3) for a maximum of 90 days to support report regeneration and dispute resolution. After 90 days, documents are permanently deleted. Account holders may request earlier deletion at any time.</p>
               <p><strong>3.4 Contractor Invoice Storage.</strong> Invoices submitted by Contractor Members for verification purposes are retained for the duration of the membership and for 12 months following termination, for audit and dispute resolution purposes.</p>
             </LegalSection>
 
             <LegalSection title="4. How We Use Your Information">
               <ul className="list-disc pl-6 space-y-2">
-                <li>To generate and deliver your Trust Score Report;</li>
+                <li>To generate and deliver your Variance Analysis Report;</li>
                 <li>To maintain your account and subscription;</li>
                 <li>To improve the accuracy of our pricing benchmark models using anonymized, aggregated data;</li>
-                <li>To detect and prevent fraud, abuse, and unauthorized access;</li>
+                <li>To detect and prevent abuse and unauthorized access;</li>
                 <li>To comply with legal obligations and respond to lawful requests from government authorities;</li>
                 <li>To send transactional emails (receipts, report delivery, account notices).</li>
               </ul>

@@ -22,7 +22,7 @@ export function Navbar() {
 
   const navLinks = [
     { label: "How it Works", href: "#how-it-works" },
-    { label: "Trust Score", href: "#trust-score" },
+    { label: "Variance Analysis", href: "#trust-score" },
     { label: "Examples", href: "#examples" },
     { label: "Pricing", href: "/pricing", isRoute: true },
     { label: "For Contractors", href: "#contractors", subtle: true },

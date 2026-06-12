@@ -10,7 +10,7 @@ import {
   Home, BarChart2, Settings, Plus, AlertTriangle, CheckCircle, Clock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { TrustScoreGauge } from "@/components/TrustScoreGauge";
+import { VarianceGauge } from "@/components/VarianceGauge";
 import { DemoModal } from "@/components/DemoModal";
 import { toast } from "sonner";
 
@@ -62,9 +62,9 @@ const MOCK_REPORTS = [
 ];
 
 function getStatusBadge(status: string, score: number) {
-  if (status === "overpriced") return { label: "Overpriced", color: "#F97316", bg: "rgba(249,115,22,0.12)" };
-  if (status === "fair") return { label: "Fair Price", color: "#14B8A6", bg: "rgba(20,184,166,0.12)" };
-  return { label: "Borderline", color: "#EAB308", bg: "rgba(234,179,8,0.12)" };
+  if (status === "overpriced") return { label: "Variance Observed", color: "#F97316", bg: "rgba(249,115,22,0.12)" };
+  if (status === "fair") return { label: "Baseline Aligned", color: "#14B8A6", bg: "rgba(20,184,166,0.12)" };
+  return { label: "Variance Noted", color: "#EAB308", bg: "rgba(234,179,8,0.12)" };
 }
 
 export default function Dashboard() {
@@ -238,7 +238,7 @@ export default function Dashboard() {
               >
                 {/* Gauge */}
                 <div className="flex-shrink-0">
-                  <TrustScoreGauge score={report.score} size={80} strokeWidth={7} dark={false} animated showLabel={false} />
+                  <VarianceGauge index={report.score} size={80} strokeWidth={7} dark={false} animated showLabel={false} />
                 </div>
 
                 {/* Info */}
@@ -288,7 +288,7 @@ export default function Dashboard() {
             Got another quote?
           </p>
           <p className="text-sm" style={{ color: "#64748B", fontFamily: "'Inter', sans-serif" }}>
-            Upload it and get your Trust Score in 30 seconds.
+            Upload it and view Variance Analysis in 30 seconds.
           </p>
         </div>
       </main>
